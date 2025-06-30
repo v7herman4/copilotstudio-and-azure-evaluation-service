@@ -6,7 +6,7 @@
       <LocalizedName description="CPS Azure Agent Evaluation Service" languagecode="1033" />
     </LocalizedNames>
     <Descriptions />
-    <Version>1.0.0.0</Version>
+    <Version>1.0.0.1</Version>
     <Managed>0</Managed>
     <Publisher>
       <UniqueName>valterherman</UniqueName>
@@ -143,6 +143,12 @@
         <Required type="1" schemaName="conversationtranscript" displayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
           <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
         </Required>
+        <Dependent type="60" displayName="Convo Content Quickview" parentDisplayName="ConversationTranscript" id="{e5c9e797-0b43-f011-b4cb-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="conversationtranscript" displayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
         <Dependent type="62" schemaName="veh_CPSFDPAgentEvalAdminApp" />
       </MissingDependency>
       <MissingDependency>
@@ -176,6 +182,12 @@
         <Dependent type="60" displayName="ConvTranscriptMainForm" parentDisplayName="ConversationTranscript" id="{530f9b1c-f246-f011-877a-7c1e520c84d8}" />
       </MissingDependency>
       <MissingDependency>
+        <Required type="2" schemaName="content" displayName="Content" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="60" displayName="Convo Content Quickview" parentDisplayName="ConversationTranscript" id="{e5c9e797-0b43-f011-b4cb-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
         <Required type="2" schemaName="conversationstarttime" displayName="ConversationStartTime" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
           <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
         </Required>
@@ -186,6 +198,12 @@
           <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
         </Required>
         <Dependent type="60" displayName="ConvTranscriptMainForm" parentDisplayName="ConversationTranscript" id="{530f9b1c-f246-f011-877a-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="conversationstarttime" displayName="ConversationStartTime" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="60" displayName="Convo Content Quickview" parentDisplayName="ConversationTranscript" id="{e5c9e797-0b43-f011-b4cb-7c1e520c84d8}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="2" schemaName="conversationtranscriptid" displayName="conversationtranscript" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
@@ -228,6 +246,10 @@
         <Dependent type="60" displayName="ConvTranscriptMainForm" parentDisplayName="ConversationTranscript" id="{530f9b1c-f246-f011-877a-7c1e520c84d8}" />
       </MissingDependency>
       <MissingDependency>
+        <Required type="2" schemaName="ownerid" displayName="Owner" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="Active" />
+        <Dependent type="60" displayName="Convo Content Quickview" parentDisplayName="ConversationTranscript" id="{e5c9e797-0b43-f011-b4cb-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
         <Required type="2" schemaName="schematype" displayName="SchemaType" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
           <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
         </Required>
@@ -258,14 +280,6 @@
         <Dependent type="80" schemaName="veh_CPSFDPAgentEvalAdminApp" displayName="CPS FDP Agent Eval Admin App" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="60" displayName="Convo Content Quickview" parentDisplayName="ConversationTranscript" solution="Active" id="{e5c9e797-0b43-f011-b4cb-7c1e520c84d8}" />
-        <Dependent type="60" displayName="Information" parentDisplayName="ConversationPromptEvaluation" id="{af120455-d743-404e-9d26-757aa8aeb616}" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="60" displayName="Convo Content Quickview" parentDisplayName="ConversationTranscript" solution="Active" id="{e5c9e797-0b43-f011-b4cb-7c1e520c84d8}" />
-        <Dependent type="80" schemaName="veh_CPSFDPAgentEvalAdminApp" displayName="CPS FDP Agent Eval Admin App" />
-      </MissingDependency>
-      <MissingDependency>
         <Required type="61" schemaName="msdyn_/Images/AppModule_Default_Icon.png" displayName="msdyn_/Images/AppModule_Default_Icon.png" solution="AppModuleWebResources (2.5)" />
         <Dependent type="80" schemaName="veh_CPSFDPAgentEvalAdminApp" displayName="CPS FDP Agent Eval Admin App" />
       </MissingDependency>
@@ -276,6 +290,10 @@
       <MissingDependency>
         <Required type="connectionreference" displayName="new_sharedcommondataserviceforapps_7d711" solution="CopilotStudioAccelerator (20240918.1)" id.connectionreferencelogicalname="new_sharedcommondataserviceforapps_7d711" />
         <Dependent type="29" displayName="Analyze CPS Agent Convo on Convo Trx Create" id="{fcd33c5e-ea3b-f011-b4cc-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="connectionreference" displayName="new_sharedcommondataserviceforapps_7d711" solution="CopilotStudioAccelerator (20240918.1)" id.connectionreferencelogicalname="new_sharedcommondataserviceforapps_7d711" />
+        <Dependent type="connectionreference" displayName="new_sharedcommondataserviceforapps_7d711" id.connectionreferencelogicalname="new_sharedcommondataserviceforapps_7d711" />
       </MissingDependency>
       <MissingDependency>
         <Required type="SettingDefinition" displayName="AppChannel" solution="msdyn_AppFrameworkInfraExtensions (1.0.0.14)" id.uniquename="AppChannel">
