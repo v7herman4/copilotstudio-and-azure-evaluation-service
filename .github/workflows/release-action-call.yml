@@ -12,7 +12,7 @@ jobs:
     uses: ./.github/workflows/release-solution-to-prod-with-inputs.yml
     with:
       #You can specify the solution name here
-      solution_name: ALMLab
+      solution_name: CPSFDPAgentEvaluations
       #Update your values here
       BUILD_ENVIRONMENT_URL: 'https://org588f89b6.crm.dynamics.com'
       PRODUCTION_ENVIRONMENT_URL: 'https://org89204439.crm.dynamics.com'
