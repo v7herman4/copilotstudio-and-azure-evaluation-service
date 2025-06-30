@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Workflow WorkflowId="{ddd0775a-7841-f011-b4cb-7c1e520c84d8}" Name="Child Flow - Request Evalutation - Synchronous v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <JsonFileName>/Workflows/ChildFlow-RequestEvalutation-Synchronousv2-DDD0775A-7841-F011-B4CB-7C1E520C84D8.json</JsonFileName>
+<Workflow WorkflowId="{53f54677-ec55-f011-877a-000d3a1ee563}" Name="Child Flow - Request Evalutation - Synchronous v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <JsonFileName>/Workflows/ChildFlow-RequestEvalutation-Synchronousv3-53F54677-EC55-F011-877A-000D3A1EE563.json</JsonFileName>
   <Type>1</Type>
   <Subprocess>0</Subprocess>
   <Category>5</Category>
@@ -19,9 +19,9 @@
   <IsCustomizable>1</IsCustomizable>
   <BusinessProcessType>0</BusinessProcessType>
   <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
-  <ModernFlowType>0</ModernFlowType>
+  <ModernFlowType>1</ModernFlowType>
   <PrimaryEntity>none</PrimaryEntity>
   <LocalizedNames>
-    <LocalizedName languagecode="1033" description="Child Flow - Request Evalutation - Synchronous v2" />
+    <LocalizedName languagecode="1033" description="Child Flow - Request Evalutation - Synchronous v3" />
   </LocalizedNames>
 </Workflow>
