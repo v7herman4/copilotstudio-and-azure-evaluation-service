@@ -157,6 +157,17 @@
   </AIModels>
   <connectionreferences>
     <connectionreference connectionreferencelogicalname="new_sharedcommondataserviceforapps_7d711"></connectionreference>
+    <connectionreference connectionreferencelogicalname="new_sharedveh5fcps20azure20evaluation20service5f34d393299b714193_3f3c1">
+      <connectionreferencedisplayname>CPS Azure Evaluation Service</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_veh-5fcps-20azure-20evaluation-20service-5f34d393299b714193</connectorid>
+      <customconnectorid>
+        <connectorid>ba458d18-3cc7-4ff9-8608-60a92d91e16c</connectorid>
+      </customconnectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
     <connectionreference connectionreferencelogicalname="veh_sharedcommondataserviceforapps_00757">
       <connectionreferencedisplayname>Microsoft Dataverse CPSFDPAgentEvaluations-00757</connectionreferencedisplayname>
       <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
