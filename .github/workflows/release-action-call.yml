@@ -14,7 +14,7 @@ jobs:
       #You can specify the solution name here
       solution_name: CPSFDPAgentEvaluations
       #Update your values here
-      BUILD_ENVIRONMENT_URL: 'https://org588f89b6.crm.dynamics.com'
+      BUILD_ENVIRONMENT_URL: 'https://org270e36c6.crm.dynamics.com'
       PRODUCTION_ENVIRONMENT_URL: 'https://org89204439.crm.dynamics.com'
       CLIENT_ID: 'b31526dd-2daf-447c-872f-875c76aa6c83'
       TENANT_ID: '9a434241-4e3f-484e-80e6-fe544f4e8aca' 
