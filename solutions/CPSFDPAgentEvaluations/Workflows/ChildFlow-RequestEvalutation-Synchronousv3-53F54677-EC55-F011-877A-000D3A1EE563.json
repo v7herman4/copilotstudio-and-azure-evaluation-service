@@ -1,36 +1,37 @@
 {
   "properties": {
     "connectionReferences": {
-      "shared_fdp-20agent-20evaluations-5f34d393299b714193-5f26321d34753a16b1": {
-        "runtimeSource": "embedded",
-        "connection": {
-          "connectionReferenceLogicalName": "veh_sharedfdp20agent20evaluations5f34d393299b7141935f26321d34753a16b_030d2"
-        },
+      "shared_veh-5fcps-20azure-20evaluation-20service-5f34d393299b714193": {
         "api": {
-          "name": "shared_fdp-20agent-20evaluations-5f34d393299b714193-5f26321d34753a16b1"
-        }
+          "name": "shared_veh-5fcps-20azure-20evaluation-20service-5f34d393299b714193",
+          "logicalName": "veh_5Fcps-20azure-20evaluation-20service"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedveh5fcps20azure20evaluation20service5f34d393299b714193_3f3c1"
+        },
+        "runtimeSource": "embedded"
       },
       "shared_commondataserviceforapps": {
-        "runtimeSource": "embedded",
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
         "connection": {
           "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_7d711"
         },
-        "api": {
-          "name": "shared_commondataserviceforapps"
-        }
+        "runtimeSource": "embedded"
       }
     },
     "definition": {
       "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
       "contentVersion": "1.0.0.0",
       "parameters": {
-        "$connections": {
-          "defaultValue": {},
-          "type": "Object"
-        },
         "$authentication": {
           "defaultValue": {},
           "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
         }
       },
       "triggers": {
@@ -124,10 +125,6 @@
           "type": "Response",
           "kind": "PowerApp",
           "inputs": {
-            "statusCode": 200,
-            "body": {
-              "success": "@true"
-            },
             "schema": {
               "type": "object",
               "properties": {
@@ -136,7 +133,12 @@
                   "x-ms-dynamically-added": true,
                   "type": "boolean"
                 }
-              }
+              },
+              "additionalProperties": {}
+            },
+            "statusCode": 200,
+            "body": {
+              "success": "@true"
             }
           }
         },
@@ -164,7 +166,7 @@
           "actions": {
             "Compose-EvaluatonStatus": {
               "runAfter": {
-                "FDP_Get_Evaluation_Result": [
+                "Get_Evaluation_Result": [
                   "Succeeded"
                 ]
               },
@@ -172,12 +174,11 @@
                 "operationMetadataId": "4e162fea-a2cb-473e-9963-1f5f9705b343"
               },
               "type": "Compose",
-              "inputs": "@outputs('FDP_Get_Evaluation_Result')?['body/status']"
+              "inputs": "@outputs('Get_Evaluation_Result')?['body/status']"
             },
             "Condition": {
               "actions": {
                 "Set_varCheckForResponseCounter_eq_20_to_quit_Do_Until": {
-                  "runAfter": {},
                   "metadata": {
                     "operationMetadataId": "be5cbe55-2675-46ae-9980-4c6fd80b3e23"
                   },
@@ -196,7 +197,6 @@
               "else": {
                 "actions": {
                   "Increment_varCheckForResponseCounter_plus_1": {
-                    "runAfter": {},
                     "metadata": {
                       "operationMetadataId": "6b0aff95-c4cb-44a2-93fc-d318c9acfafc"
                     },
@@ -229,7 +229,7 @@
                 "and": [
                   {
                     "equals": [
-                      "@outputs('FDP_Get_Evaluation_Result')?['body/status']",
+                      "@outputs('Get_Evaluation_Result')?['body/status']",
                       "Completed"
                     ]
                   }
@@ -240,31 +240,23 @@
               },
               "type": "If"
             },
-            "FDP_Get_Evaluation_Result": {
-              "runAfter": {},
-              "metadata": {
-                "operationMetadataId": "8d726390-d810-4889-b45f-f5399e81cc94"
-              },
+            "Get_Evaluation_Result": {
               "type": "OpenApiConnection",
               "inputs": {
-                "host": {
-                  "connectionName": "shared_fdp-20agent-20evaluations-5f34d393299b714193-5f26321d34753a16b1",
-                  "operationId": "getAgentEvaluationFdp",
-                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_fdp-20agent-20evaluations-5f34d393299b714193-5f26321d34753a16b1"
-                },
                 "parameters": {
-                  "completionId": "@outputs('FDP_Submit_Evaluation_Request')?['body/id']",
+                  "completionId": "@outputs('Submit_Evaluation_Request')?['body/id']",
                   "api-version": "2025-05-15-preview"
                 },
-                "authentication": {
-                  "type": "Raw",
-                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_veh-5fcps-20azure-20evaluation-20service-5f34d393299b714193",
+                  "operationId": "getAgentEvaluationFdp",
+                  "connectionName": "shared_veh-5fcps-20azure-20evaluation-20service-5f34d393299b714193"
                 }
               }
             }
           },
           "runAfter": {
-            "FDP_Submit_Evaluation_Request": [
+            "Submit_Evaluation_Request": [
               "Succeeded"
             ]
           },
@@ -365,7 +357,7 @@
           }
         },
         "For_each_Evaluator": {
-          "foreach": "@outputs('FDP_Get_Evaluation_Result')?['body/result']",
+          "foreach": "@outputs('Get_Evaluation_Result')?['body/result']",
           "actions": {
             "Set_variable_varEvalObj": {
               "runAfter": {
@@ -383,7 +375,6 @@
               }
             },
             "Set_varTempObj_eq_varEvalObj": {
-              "runAfter": {},
               "metadata": {
                 "operationMetadataId": "36f31b95-1666-4799-8e10-9853116194df"
               },
@@ -404,7 +395,6 @@
                   "case": "Code Vulnerability Evaluator",
                   "actions": {
                     "Set_variable_varCurrEval": {
-                      "runAfter": {},
                       "metadata": {
                         "operationMetadataId": "5d2a1321-d946-480d-9d25-bc4eeca2ca97"
                       },
@@ -420,7 +410,6 @@
                   "case": "Violence",
                   "actions": {
                     "Set_varCurrEval_Violence": {
-                      "runAfter": {},
                       "metadata": {
                         "operationMetadataId": "2ba2b709-aff0-40fd-971c-9be9a4b1004d"
                       },
@@ -436,7 +425,6 @@
                   "case": "Fluency",
                   "actions": {
                     "Set_variable_Fluency": {
-                      "runAfter": {},
                       "metadata": {
                         "operationMetadataId": "7e4ab96b-93ff-48c8-951a-d893bd22077d"
                       },
@@ -452,7 +440,6 @@
                   "case": "Coherence",
                   "actions": {
                     "Set_Coherence": {
-                      "runAfter": {},
                       "metadata": {
                         "operationMetadataId": "23dd2b45-ee52-4f80-a33d-5c4271bc5d3e"
                       },
@@ -468,7 +455,6 @@
                   "case": "HateUnfairness",
                   "actions": {
                     "Set_Hate_Unfairness": {
-                      "runAfter": {},
                       "metadata": {
                         "operationMetadataId": "6d506de2-6c57-400f-8e44-130b0849433d"
                       },
@@ -484,7 +470,6 @@
                   "case": "IndirectAttack",
                   "actions": {
                     "Set_IndirectAttack": {
-                      "runAfter": {},
                       "metadata": {
                         "operationMetadataId": "4e77a3fd-3c72-4897-b79a-12cd36b889ef"
                       },
@@ -500,7 +485,6 @@
                   "case": "Intent Resolution Evaluator",
                   "actions": {
                     "Set_Intent_Resolution_Evaluator": {
-                      "runAfter": {},
                       "metadata": {
                         "operationMetadataId": "6525a98e-bdc9-438e-b225-12932433c912"
                       },
@@ -516,7 +500,6 @@
                   "case": "Relevance",
                   "actions": {
                     "Set_Relevance": {
-                      "runAfter": {},
                       "metadata": {
                         "operationMetadataId": "8ac03685-71e7-478c-9427-9c16aff54dc1"
                       },
@@ -532,7 +515,6 @@
                   "case": "SelfHarm",
                   "actions": {
                     "Set_SelfHarm": {
-                      "runAfter": {},
                       "metadata": {
                         "operationMetadataId": "80fba949-01d6-4b41-a43f-55142387adfe"
                       },
@@ -548,7 +530,6 @@
                   "case": "Sexual",
                   "actions": {
                     "Set_Sexual": {
-                      "runAfter": {},
                       "metadata": {
                         "operationMetadataId": "0b8a1dab-768d-43b4-adea-8d103b8e188d"
                       },
@@ -564,7 +545,6 @@
                   "case": "TaskAdherence",
                   "actions": {
                     "Set_TaskAdherence": {
-                      "runAfter": {},
                       "metadata": {
                         "operationMetadataId": "732d3094-f027-4216-a166-73eae82f167c"
                       },
@@ -580,7 +560,6 @@
                   "case": "Tool Call Accuracy",
                   "actions": {
                     "Set_Tool_Call_Accuracy": {
-                      "runAfter": {},
                       "metadata": {
                         "operationMetadataId": "f44ee4cb-f4e0-4f13-9ab9-ba6233becb3a"
                       },
@@ -596,7 +575,6 @@
               "default": {
                 "actions": {
                   "Set_variable": {
-                    "runAfter": {},
                     "metadata": {
                       "operationMetadataId": "1849e469-f052-407e-8b5f-c96acdb59533"
                     },
@@ -630,77 +608,6 @@
             }
           }
         },
-        "FDP_Submit_Evaluation_Request": {
-          "runAfter": {
-            "Initialize_varCheckForResponseCounter": [
-              "Succeeded"
-            ]
-          },
-          "metadata": {
-            "operationMetadataId": "859e5f8a-0b3e-43bf-b0c0-30cc2593f2d3"
-          },
-          "type": "OpenApiConnection",
-          "inputs": {
-            "host": {
-              "connectionName": "shared_fdp-20agent-20evaluations-5f34d393299b714193-5f26321d34753a16b1",
-              "operationId": "submitAgentEvaluationFdp",
-              "apiId": "/providers/Microsoft.PowerApps/apis/shared_fdp-20agent-20evaluations-5f34d393299b714193-5f26321d34753a16b1"
-            },
-            "parameters": {
-              "api-version": "2025-05-15-preview",
-              "evaluationRequest/RunId": "@triggerBody()?['text_1']",
-              "evaluationRequest/ThreadId": "@triggerBody()?['text']",
-              "evaluationRequest/Evaluators": {
-                "Code Vulnerability Evaluator": {
-                  "Id": "azureai://built-in/evaluators/code_vulnerability"
-                },
-                "Coherence": {
-                  "Id": "azureai://built-in/evaluators/coherence"
-                },
-                "Fluency": {
-                  "Id": "azureai://built-in/evaluators/fluency"
-                },
-                "HateUnfairness": {
-                  "Id": "azureai://built-in/evaluators/hate_unfairness"
-                },
-                "IndirectAttack": {
-                  "Id": "azureai://built-in/evaluators/indirect_attack"
-                },
-                "Intent Resolution Evaluator": {
-                  "Id": "azureai://built-in/evaluators/intent_resolution"
-                },
-                "Relevance": {
-                  "Id": "azureai://built-in/evaluators/relevance"
-                },
-                "SelfHarm": {
-                  "Id": "azureai://built-in/evaluators/self_harm"
-                },
-                "Sexual": {
-                  "Id": "azureai://built-in/evaluators/sexual"
-                },
-                "TaskAdherence": {
-                  "Id": "azureai://built-in/evaluators/task_adherence"
-                },
-                "Tool Call Accuracy": {
-                  "Id": "azureai://built-in/evaluators/tool_call_accuracy"
-                },
-                "Violence": {
-                  "Id": "azureai://built-in/evaluators/violence"
-                }
-              },
-              "evaluationRequest/Query": "@variables('varQueryArray')",
-              "evaluationRequest/Response": "@variables('varResponseArray')",
-              "evaluationRequest/ToolDefinitions": [],
-              "evaluationRequest/SamplingConfiguration/SamplingPercent": 100,
-              "evaluationRequest/RedactionConfiguration/RedactScoreProperties": false,
-              "evaluationRequest/AppInsightsConnectionString": "InstrumentationKey=e5f61295-c763-4cfd-ab4e-45cddd5211cf;IngestionEndpoint=https://eastus2-3.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus2.livediagnostics.monitor.azure.com/;ApplicationId=cfce9ec1-2c60-4b88-8b40-f3341502bfe6"
-            },
-            "authentication": {
-              "type": "Raw",
-              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
-            }
-          }
-        },
         "Add_ConversationPrompEvaluation": {
           "runAfter": {
             "For_each_Evaluator": [
@@ -712,11 +619,6 @@
           },
           "type": "OpenApiConnection",
           "inputs": {
-            "host": {
-              "connectionName": "shared_commondataserviceforapps",
-              "operationId": "CreateRecord",
-              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
-            },
             "parameters": {
               "entityName": "veh_conversationpromptevaluations",
               "item/veh_ConversationTranscript@odata.bind": "/conversationtranscripts(@{triggerBody()?['text']})",
@@ -761,9 +663,10 @@
               "item/veh_violenceevalstatus": "@variables('varEvalObj')?['Violence Status']",
               "item/veh_violencereason": "@variables('varEvalObj')?['Violence Reason']"
             },
-            "authentication": {
-              "type": "Raw",
-              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "CreateRecord",
+              "connectionName": "shared_commondataserviceforapps"
             }
           }
         },
@@ -888,10 +791,74 @@
             ]
           },
           "description": "Used to replace single quotes inside actual text with non-system delimiter so converting to JSON will work. Will escape the single-quote "
+        },
+        "Submit_Evaluation_Request": {
+          "runAfter": {
+            "Initialize_varCheckForResponseCounter": [
+              "Succeeded"
+            ]
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "api-version": "2025-05-15-preview",
+              "evaluationRequest/RunId": "@triggerBody()?['text_1']",
+              "evaluationRequest/ThreadId": "@triggerBody()?['text']",
+              "evaluationRequest/Evaluators": {
+                "Code Vulnerability Evaluator": {
+                  "Id": "azureai://built-in/evaluators/code_vulnerability"
+                },
+                "Coherence": {
+                  "Id": "azureai://built-in/evaluators/coherence"
+                },
+                "Fluency": {
+                  "Id": "azureai://built-in/evaluators/fluency"
+                },
+                "HateUnfairness": {
+                  "Id": "azureai://built-in/evaluators/hate_unfairness"
+                },
+                "IndirectAttack": {
+                  "Id": "azureai://built-in/evaluators/indirect_attack"
+                },
+                "Intent Resolution Evaluator": {
+                  "Id": "azureai://built-in/evaluators/intent_resolution"
+                },
+                "Relevance": {
+                  "Id": "azureai://built-in/evaluators/relevance"
+                },
+                "SelfHarm": {
+                  "Id": "azureai://built-in/evaluators/self_harm"
+                },
+                "Sexual": {
+                  "Id": "azureai://built-in/evaluators/sexual"
+                },
+                "TaskAdherence": {
+                  "Id": "azureai://built-in/evaluators/task_adherence"
+                },
+                "Tool Call Accuracy": {
+                  "Id": "azureai://built-in/evaluators/tool_call_accuracy"
+                },
+                "Violence": {
+                  "Id": "azureai://built-in/evaluators/violence"
+                }
+              },
+              "evaluationRequest/Query": "@variables('varQueryArray')",
+              "evaluationRequest/Response": "@variables('varResponseArray')",
+              "evaluationRequest/ToolDefinitions": [],
+              "evaluationRequest/SamplingConfiguration/SamplingPercent": 100,
+              "evaluationRequest/RedactionConfiguration/RedactScoreProperties": false,
+              "evaluationRequest/AppInsightsConnectionString": "InstrumentationKey=e5f61295-c763-4cfd-ab4e-45cddd5211cf;IngestionEndpoint=https://eastus2-3.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus2.livediagnostics.monitor.azure.com/;ApplicationId=cfce9ec1-2c60-4b88-8b40-f3341502bfe6"
+            },
+            "host": {
+              "apiId": "",
+              "operationId": "submitAgentEvaluationFdp",
+              "connectionName": "shared_veh-5fcps-20azure-20evaluation-20service-5f34d393299b714193"
+            }
+          }
         }
       }
     },
-    "templateName": ""
+    "templateName": null
   },
   "schemaVersion": "1.0.0.0"
 }
