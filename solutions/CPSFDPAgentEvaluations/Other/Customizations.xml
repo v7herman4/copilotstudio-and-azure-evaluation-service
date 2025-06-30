@@ -155,6 +155,7 @@
     </AIModel>
   </AIModels>
   <connectionreferences>
+    <connectionreference connectionreferencelogicalname="new_sharedcommondataserviceforapps_7d711"></connectionreference>
     <connectionreference connectionreferencelogicalname="veh_sharedcommondataserviceforapps_00757">
       <connectionreferencedisplayname>Microsoft Dataverse CPSFDPAgentEvaluations-00757</connectionreferencedisplayname>
       <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
