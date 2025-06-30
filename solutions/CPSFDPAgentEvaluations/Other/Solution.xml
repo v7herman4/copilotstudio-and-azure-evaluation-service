@@ -84,6 +84,7 @@
       <RootComponent type="29" id="{fcd33c5e-ea3b-f011-b4cc-7c1e520c84d8}" behavior="0" />
       <RootComponent type="300" schemaName="veh_promptevaluationruns_988db" behavior="0" />
       <RootComponent type="300" schemaName="veh_promptresponseapppbi_fcf37" behavior="0" />
+      <RootComponent type="372" id="{ba458d18-3cc7-4ff9-8608-60a92d91e16c}" schemaName="veh_5Fcps-20azure-20evaluation-20service" behavior="0" />
       <RootComponent type="401" id="{18b01d14-1b4b-41e1-9927-a7366c4b1599}" behavior="0" />
       <RootComponent type="401" id="{86ffd107-d265-4b67-8684-506fe5477b7b}" behavior="0" />
       <RootComponent type="401" id="{d5348810-df80-4488-89d0-7d59b2b9af26}" behavior="0" />
