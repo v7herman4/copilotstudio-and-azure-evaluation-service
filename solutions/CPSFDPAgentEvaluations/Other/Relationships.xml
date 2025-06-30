@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EntityRelationships xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <EntityRelationship Name="lk_veh_conversationpromptevaluation_createdby" />
+  <EntityRelationship Name="lk_veh_conversationpromptevaluation_modifiedby" />
+  <EntityRelationship Name="organization_veh_conversationpromptevaluation" />
+  <EntityRelationship Name="veh_conversationpromptevaluation_ConversationTranscript_conversationtranscript" />
+</EntityRelationships>

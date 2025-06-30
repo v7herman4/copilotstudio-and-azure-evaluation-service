@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{48212de2-3d1a-4c08-b9d6-f8d2de675459}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="veh_runid" select="1" icon="1" preview="1">
+        <row name="result" id="veh_conversationpromptevaluationid">
+          <cell name="veh_conversationtranscript" width="172" />
+          <cell name="veh_runid" width="146" />
+          <cell name="veh_runindex" width="100" />
+          <cell name="createdon" width="125" />
+          <cell name="veh_codevulnerabilityscore" width="147" />
+          <cell name="veh_coherencescore" width="100" />
+          <cell name="veh_fluencyscore" width="100" />
+          <cell name="veh_hateunfairnessscore" width="131" />
+          <cell name="veh_indirectattackscore" width="125" />
+          <cell name="veh_intentresolutionscore" width="137" />
+          <cell name="veh_relevancescore" width="100" />
+          <cell name="veh_selfharmscore" width="100" />
+          <cell name="veh_sexualscore" width="100" />
+          <cell name="veh_taskadherencescore" width="131" />
+          <cell name="veh_toolcallaccuracyscore" width="150" />
+          <cell name="veh_violencescore" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="veh_conversationpromptevaluation">
+          <attribute name="veh_conversationpromptevaluationid" />
+          <attribute name="veh_runid" />
+          <attribute name="createdon" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="veh_codevulnerabilityscore" />
+          <attribute name="veh_coherencescore" />
+          <attribute name="veh_fluencyscore" />
+          <attribute name="veh_hateunfairnessscore" />
+          <attribute name="veh_indirectattackscore" />
+          <attribute name="veh_intentresolutionscore" />
+          <attribute name="veh_relevancescore" />
+          <attribute name="veh_selfharmscore" />
+          <attribute name="veh_sexualscore" />
+          <attribute name="veh_taskadherencescore" />
+          <attribute name="veh_toolcallaccuracyscore" />
+          <attribute name="veh_violencescore" />
+          <attribute name="veh_conversationtranscript" />
+          <attribute name="veh_runindex" />
+          <order attribute="veh_runindex" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active ConversationPromptEvaluations" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

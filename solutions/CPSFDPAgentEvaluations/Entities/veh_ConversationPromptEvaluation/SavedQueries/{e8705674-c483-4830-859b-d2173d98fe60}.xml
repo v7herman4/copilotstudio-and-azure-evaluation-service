@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{e8705674-c483-4830-859b-d2173d98fe60}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="veh_runid" select="1" icon="1" preview="1">
+        <row name="result" id="veh_conversationpromptevaluationid">
+          <cell name="veh_runid" width="300" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="veh_conversationpromptevaluation">
+          <attribute name="veh_conversationpromptevaluationid" />
+          <attribute name="veh_runid" />
+          <attribute name="createdon" />
+          <order attribute="veh_runid" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="1" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Inactive ConversationPromptEvaluations" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>
