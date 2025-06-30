@@ -14,6 +14,7 @@
   <AppModules />
   <EntityDataProviders />
   <CanvasApps />
+  <Connectors />
   <AIModels>
     <AIModel>
       <msdyn_aimodelid>{86ffd107-d265-4b67-8684-506fe5477b7b}</msdyn_aimodelid>
