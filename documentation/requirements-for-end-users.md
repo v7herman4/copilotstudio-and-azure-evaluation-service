@@ -1,9 +1,9 @@
 ## Table of Contents
 - [Overview](#overview)
-- [Requirements for Installation](documentation/requirements-for-installation.md)
-- [Requirements for End Users](documentation/requirements-for-endusers.md)
-- [Installation Guide](documentation/installation.md)
-- [FAQs](documentation/faq.md)
+- [Requirements for Installation](requirements-for-installation.md)
+- [Requirements for End Users](requirements-for-endusers.md)
+- [Installation Guide](installation.md)
+- [FAQs](faq.md)
 <br><br>
 
 ## Requirements for End Users
