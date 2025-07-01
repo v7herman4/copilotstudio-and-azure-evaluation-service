@@ -6,7 +6,7 @@
       <LocalizedName description="CPS Azure Agent Evaluation Service" languagecode="1033" />
     </LocalizedNames>
     <Descriptions />
-    <Version>1.0.0.5</Version>
+    <Version>1.0.0.9</Version>
     <Managed>0</Managed>
     <Publisher>
       <UniqueName>valterherman</UniqueName>
@@ -80,9 +80,9 @@
     <RootComponents>
       <RootComponent type="1" schemaName="conversationtranscript" behavior="1" />
       <RootComponent type="1" schemaName="veh_conversationpromptevaluation" behavior="0" />
+      <RootComponent type="20" id="{3532c9f4-a356-f011-877a-000d3a1ee563}" behavior="0" />
       <RootComponent type="29" id="{53f54677-ec55-f011-877a-000d3a1ee563}" behavior="0" />
       <RootComponent type="29" id="{fcd33c5e-ea3b-f011-b4cc-7c1e520c84d8}" behavior="0" />
-      <RootComponent type="300" schemaName="veh_promptevaluationruns_988db" behavior="0" />
       <RootComponent type="300" schemaName="veh_promptresponseapppbi_fcf37" behavior="0" />
       <RootComponent type="372" id="{ba458d18-3cc7-4ff9-8608-60a92d91e16c}" schemaName="veh_5Fcps-20azure-20evaluation-20service" behavior="0" />
       <RootComponent type="401" id="{18b01d14-1b4b-41e1-9927-a7366c4b1599}" behavior="0" />
@@ -126,12 +126,6 @@
         <Required type="1" schemaName="conversationtranscript" displayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
           <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
         </Required>
-        <Dependent type="300" schemaName="veh_promptevaluationruns_988db" displayName="Prompt Evaluation Runs" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="1" schemaName="conversationtranscript" displayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
-          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
-        </Required>
         <Dependent type="300" schemaName="veh_promptresponseapppbi_fcf37" displayName="Prompt Response App PBI" />
       </MissingDependency>
       <MissingDependency>
@@ -157,12 +151,6 @@
           <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
         </Required>
         <Dependent type="80" schemaName="veh_CPSFDPAgentEvalAdminApp" displayName="CPS FDP Agent Eval Admin App" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="1" schemaName="msdyn_aimodel" displayName="AI Model" solution="msdyn_AISolution (202505.3.27.2)">
-          <package appName="PowerAI" version="202505.3.27.2">msdyn_AISolutionAnchor (202505.3.27.2)</package>
-        </Required>
-        <Dependent type="300" schemaName="veh_promptevaluationruns_988db" displayName="Prompt Evaluation Runs" />
       </MissingDependency>
       <MissingDependency>
         <Required type="1" schemaName="msdyn_aimodel" displayName="AI Model" solution="msdyn_AISolution (202505.3.27.2)">
