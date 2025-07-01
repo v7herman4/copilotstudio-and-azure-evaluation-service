@@ -11,6 +11,7 @@ To understand more about the concept of Evaluation in generative AI, note the fo
 
 Note that not all capabilities in the Observability features of Azure AI Foundry are made available through this solution.
 
+
 The Evaluation Service provides an API endpoint with which a workload can programmatically interact to retrieve evaluations based on agent conversations. This “Copilot Studio and Azure Evaluation Service” solution combines the power of low-code agents with the availability of pro-code Azure services to achieve enterprise-strength evaluations for your agent created in Copilot Studios. Low-code workflows run in the background to scour records created in the ConversationTranscript table created in Dataverse. The conversations in this table are sent to the Evaluation Service which returns values and reasons that are stored in a custom Dataverse table.
 
 The following **quality** evaluators are returned from the service:
