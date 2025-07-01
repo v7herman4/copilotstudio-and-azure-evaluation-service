@@ -6,7 +6,7 @@
       <LocalizedName description="CPS Azure Agent Evaluation Service" languagecode="1033" />
     </LocalizedNames>
     <Descriptions />
-    <Version>1.0.0.1</Version>
+    <Version>1.0.0.5</Version>
     <Managed>0</Managed>
     <Publisher>
       <UniqueName>valterherman</UniqueName>
@@ -159,14 +159,14 @@
         <Dependent type="80" schemaName="veh_CPSFDPAgentEvalAdminApp" displayName="CPS FDP Agent Eval Admin App" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="1" schemaName="msdyn_aimodel" displayName="AI Model" solution="msdyn_AISolution (202505.2.7.2)">
-          <package appName="PowerAI" version="202505.2.7.2">msdyn_AISolutionAnchor (202505.2.7.2)</package>
+        <Required type="1" schemaName="msdyn_aimodel" displayName="AI Model" solution="msdyn_AISolution (202505.3.27.2)">
+          <package appName="PowerAI" version="202505.3.27.2">msdyn_AISolutionAnchor (202505.3.27.2)</package>
         </Required>
         <Dependent type="300" schemaName="veh_promptevaluationruns_988db" displayName="Prompt Evaluation Runs" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="1" schemaName="msdyn_aimodel" displayName="AI Model" solution="msdyn_AISolution (202505.2.7.2)">
-          <package appName="PowerAI" version="202505.2.7.2">msdyn_AISolutionAnchor (202505.2.7.2)</package>
+        <Required type="1" schemaName="msdyn_aimodel" displayName="AI Model" solution="msdyn_AISolution (202505.3.27.2)">
+          <package appName="PowerAI" version="202505.3.27.2">msdyn_AISolutionAnchor (202505.3.27.2)</package>
         </Required>
         <Dependent type="300" schemaName="veh_promptresponseapppbi_fcf37" displayName="Prompt Response App PBI" />
       </MissingDependency>
@@ -283,18 +283,6 @@
       <MissingDependency>
         <Required type="61" schemaName="msdyn_/Images/AppModule_Default_Icon.png" displayName="msdyn_/Images/AppModule_Default_Icon.png" solution="AppModuleWebResources (2.5)" />
         <Dependent type="80" schemaName="veh_CPSFDPAgentEvalAdminApp" displayName="CPS FDP Agent Eval Admin App" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="connectionreference" displayName="new_sharedcommondataserviceforapps_7d711" solution="CopilotStudioAccelerator (20240918.1)" id.connectionreferencelogicalname="new_sharedcommondataserviceforapps_7d711" />
-        <Dependent type="29" displayName="Child Flow - Request Evalutation - Synchronous v3" id="{53f54677-ec55-f011-877a-000d3a1ee563}" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="connectionreference" displayName="new_sharedcommondataserviceforapps_7d711" solution="CopilotStudioAccelerator (20240918.1)" id.connectionreferencelogicalname="new_sharedcommondataserviceforapps_7d711" />
-        <Dependent type="29" displayName="Analyze CPS Agent Convo on Convo Trx Create" id="{fcd33c5e-ea3b-f011-b4cc-7c1e520c84d8}" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="connectionreference" displayName="new_sharedcommondataserviceforapps_7d711" solution="CopilotStudioAccelerator (20240918.1)" id.connectionreferencelogicalname="new_sharedcommondataserviceforapps_7d711" />
-        <Dependent type="connectionreference" displayName="new_sharedcommondataserviceforapps_7d711" id.connectionreferencelogicalname="new_sharedcommondataserviceforapps_7d711" />
       </MissingDependency>
       <MissingDependency>
         <Required type="SettingDefinition" displayName="AppChannel" solution="msdyn_AppFrameworkInfraExtensions (1.0.0.14)" id.uniquename="AppChannel">

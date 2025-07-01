@@ -156,7 +156,6 @@
     </AIModel>
   </AIModels>
   <connectionreferences>
-    <connectionreference connectionreferencelogicalname="new_sharedcommondataserviceforapps_7d711"></connectionreference>
     <connectionreference connectionreferencelogicalname="new_sharedveh5fcps20azure20evaluation20service5f34d393299b714193_3f3c1">
       <connectionreferencedisplayname>CPS Azure Evaluation Service</connectionreferencedisplayname>
       <connectorid>/providers/Microsoft.PowerApps/apis/shared_veh-5fcps-20azure-20evaluation-20service-5f34d393299b714193</connectorid>
@@ -211,14 +210,6 @@
     <connectionreference connectionreferencelogicalname="veh_sharedmicrosoftcopilotstudio_5ea5d">
       <connectionreferencedisplayname>Microsoft Copilot Studio CPSFDPAgentEvaluations-5ea5d</connectionreferencedisplayname>
       <connectorid>/providers/Microsoft.PowerApps/apis/shared_microsoftcopilotstudio</connectorid>
-      <iscustomizable>1</iscustomizable>
-      <promptingbehavior>0</promptingbehavior>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
-    <connectionreference connectionreferencelogicalname="veh_sharednunatak5fdev5f34d393299b7141935f26321d34753a16b1_159db">
-      <connectionreferencedisplayname>Nunatak_dev CPSFDPAgentEvaluations-159db</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_nunatak-5fdev-5f34d393299b714193-5f26321d34753a16b1</connectorid>
       <iscustomizable>1</iscustomizable>
       <promptingbehavior>0</promptingbehavior>
       <statecode>0</statecode>

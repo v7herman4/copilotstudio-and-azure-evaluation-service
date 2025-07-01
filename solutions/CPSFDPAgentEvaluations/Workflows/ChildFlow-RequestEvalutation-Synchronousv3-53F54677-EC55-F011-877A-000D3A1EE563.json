@@ -11,12 +11,12 @@
         },
         "runtimeSource": "embedded"
       },
-      "shared_commondataserviceforapps": {
+      "shared_commondataserviceforapps-1": {
         "api": {
           "name": "shared_commondataserviceforapps"
         },
         "connection": {
-          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_7d711"
+          "connectionReferenceLogicalName": "veh_sharedcommondataserviceforapps_00757"
         },
         "runtimeSource": "embedded"
       }
@@ -666,7 +666,7 @@
             "host": {
               "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
               "operationId": "CreateRecord",
-              "connectionName": "shared_commondataserviceforapps"
+              "connectionName": "shared_commondataserviceforapps-1"
             }
           }
         },
