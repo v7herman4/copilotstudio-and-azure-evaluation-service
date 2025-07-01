@@ -1,73 +1,58 @@
 {
   "properties": {
     "connectionReferences": {
-      "shared_commondataserviceforapps": {
+      "shared_commondataserviceforapps_2": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "veh_sharedcommondataserviceforapps_00757"
+        },
         "api": {
           "name": "shared_commondataserviceforapps"
-        },
-        "connection": {
-          "connectionReferenceLogicalName": "veh_sharedcommondataserviceforapps_6946b"
-        },
-        "runtimeSource": "embedded"
-      },
-      "shared_commondataserviceforapps_1": {
-        "api": {
-          "name": "shared_commondataserviceforapps"
-        },
-        "connection": {
-          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_7d711"
-        },
-        "runtimeSource": "embedded"
+        }
       }
     },
     "definition": {
       "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
       "contentVersion": "1.0.0.0",
       "parameters": {
-        "$authentication": {
-          "defaultValue": {},
-          "type": "SecureObject"
-        },
         "$connections": {
           "defaultValue": {},
           "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
         }
       },
       "triggers": {
         "New_ConversationTranscripts": {
+          "metadata": {
+            "operationMetadataId": "0ea15206-6438-4394-a552-798169af908b"
+          },
           "type": "OpenApiConnectionWebhook",
           "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps_2",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
             "parameters": {
               "subscriptionRequest/message": 1,
               "subscriptionRequest/entityname": "conversationtranscript",
               "subscriptionRequest/scope": 4
             },
-            "host": {
-              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
-              "operationId": "SubscribeWebhookTrigger",
-              "connectionName": "shared_commondataserviceforapps"
-            }
-          },
-          "metadata": {
-            "operationMetadataId": "0ea15206-6438-4394-a552-798169af908b"
+            "authentication": "@parameters('$authentication')"
           }
         }
       },
       "actions": {
         "Condition_is_PVA_convo": {
-          "type": "If",
-          "expression": {
-            "and": [
-              {
-                "equals": [
-                  "@triggerOutputs()?['body/schematype']",
-                  "powervirtualagents"
-                ]
-              }
-            ]
-          },
           "actions": {
             "ParseJSONConvo": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "611f480e-d9ba-4a71-8d16-c0b63a270baa"
+              },
               "type": "ParseJson",
               "inputs": {
                 "content": "@triggerOutputs()?['body/content']",
@@ -161,28 +146,23 @@
                     }
                   }
                 }
-              },
-              "metadata": {
-                "operationMetadataId": "611f480e-d9ba-4a71-8d16-c0b63a270baa"
               }
             },
             "Apply_to_each_Activity": {
-              "type": "Foreach",
               "foreach": "@body('Filter_array_ParseJSONConvo')",
               "actions": {
                 "Increment_varDebugCount": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "3ddd3758-5c2a-4af1-976c-1bc57782646b"
+                  },
                   "type": "IncrementVariable",
                   "inputs": {
                     "name": "varDebugCount",
                     "value": 1
-                  },
-                  "metadata": {
-                    "operationMetadataId": "3ddd3758-5c2a-4af1-976c-1bc57782646b"
                   }
                 },
                 "Compose_Body_role": {
-                  "type": "Compose",
-                  "inputs": "@items('Apply_to_each_Activity')?['from']?['role']",
                   "runAfter": {
                     "Increment_varDebugCount": [
                       "Succeeded"
@@ -190,11 +170,11 @@
                   },
                   "metadata": {
                     "operationMetadataId": "cbc3a44e-fc7d-43d3-ab34-e989169481bf"
-                  }
+                  },
+                  "type": "Compose",
+                  "inputs": "@items('Apply_to_each_Activity')?['from']?['role']"
                 },
                 "Compose_textFormat": {
-                  "type": "Compose",
-                  "inputs": "@items('Apply_to_each_Activity')?['textFormat']",
                   "runAfter": {
                     "Compose_Body_role": [
                       "Succeeded"
@@ -202,10 +182,121 @@
                   },
                   "metadata": {
                     "operationMetadataId": "de6b4db0-3876-4d8d-88d5-212ebcf888ae"
-                  }
+                  },
+                  "type": "Compose",
+                  "inputs": "@items('Apply_to_each_Activity')?['textFormat']"
                 },
                 "Condition_textFormat_is_Null_or_Not_Null": {
-                  "type": "If",
+                  "actions": {
+                    "Switch_textFormat": {
+                      "runAfter": {},
+                      "cases": {
+                        "Case_plain": {
+                          "case": "plain",
+                          "actions": {
+                            "Set_varTextConvertedFromMessage_plain_": {
+                              "runAfter": {},
+                              "metadata": {
+                                "operationMetadataId": "d7daa47a-fb9c-46c5-b57e-d5fa09c5e6d9"
+                              },
+                              "type": "SetVariable",
+                              "inputs": {
+                                "name": "varTextConvertedFromMessage",
+                                "value": "@replace(\r\n  replace(\r\n    variables('varJSONMessageBlock'),\r\n    variables('varRoleStringReplace'),\r\n    if(\r\n      equals(\r\n        items('Apply_to_each_Activity')?['from']?['role'],\r\n        variables('varRoleBot')),\r\n        'agent','user'\r\n    )\r\n  ),\r\n  variables('varTextStringReplace'),\r\n  replace(items('Apply_to_each_Activity')?['text'],'''',\r\n       variables('varSingleQuoteReplace'))\r\n)\r\n"
+                              }
+                            }
+                          }
+                        },
+                        "Case_markdown": {
+                          "case": "markdown",
+                          "actions": {
+                            "Run_CustomPromptConvertMarkdownToPlainText": {
+                              "runAfter": {},
+                              "metadata": {
+                                "flowSystemMetadata": {
+                                  "portalOperationId": "aibuilderpredict_customprompt",
+                                  "portalOperationGroup": "aibuilder",
+                                  "portalOperationApiDisplayNameOverride": "AI Builder",
+                                  "portalOperationIconOverride": "https://content.powerapps.com/resource/makerx/static/pauto/images/designeroperations/aiBuilderNew.51dbdb6b.png",
+                                  "portalOperationBrandColorOverride": "#0A76C4",
+                                  "portalOperationApiTierOverride": "Standard"
+                                },
+                                "operationMetadataId": "c52f6293-027c-40cc-a3b5-cf7d92a21ae7"
+                              },
+                              "type": "OpenApiConnection",
+                              "inputs": {
+                                "host": {
+                                  "connectionName": "shared_commondataserviceforapps_2",
+                                  "operationId": "aibuilderpredict_customprompt",
+                                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                },
+                                "parameters": {
+                                  "recordId": "d5348810-df80-4488-89d0-7d59b2b9af26",
+                                  "item/requestv2/markdownText": "@items('Apply_to_each_Activity')?['text']"
+                                },
+                                "authentication": "@parameters('$authentication')"
+                              }
+                            },
+                            "Set_varTextConvertedFromMessage_from_Markdown": {
+                              "runAfter": {
+                                "Run_CustomPromptConvertMarkdownToPlainText": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "metadata": {
+                                "operationMetadataId": "226ca467-e192-44bf-b8bd-bf6d3ac72135"
+                              },
+                              "type": "SetVariable",
+                              "inputs": {
+                                "name": "varTextConvertedFromMessage",
+                                "value": "@replace(\r\n  replace(\r\n    variables('varJSONMessageBlock'),\r\n    variables('varRoleStringReplace'),\r\n    if(\r\n      equals(\r\n        items('Apply_to_each_Activity')?['from']?['role'],\r\n        variables('varRoleBot')),\r\n        'agent','user'\r\n    )\r\n  ),\r\n  variables('varTextStringReplace'),\r\n  replace(\r\n    outputs('Run_CustomPromptConvertMarkdownToPlainText')?['body/responsev2/predictionOutput/text'],\r\n    '''',\r\n    variables('varSingleQuoteReplace'))\r\n)"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "default": {
+                        "actions": {
+                          "Set_varTextConvertedFromMessage_all_others": {
+                            "runAfter": {},
+                            "metadata": {
+                              "operationMetadataId": "c80a796c-27b1-4c7d-9b10-ec9bf554dada"
+                            },
+                            "type": "SetVariable",
+                            "inputs": {
+                              "name": "varTextConvertedFromMessage",
+                              "value": "@replace(\r\n  replace(\r\n    variables('varJSONMessageBlock'),\r\n    variables('varRoleStringReplace'),\r\n    if(\r\n      equals(\r\n        items('Apply_to_each_Activity')?['from']?['role'],\r\n        variables('varRoleBot')),\r\n        'agent','user'\r\n    )\r\n  ),\r\n  variables('varTextStringReplace'),\r\n  replace(items('Apply_to_each_Activity')?['text'],'''',\r\n       variables('varSingleQuoteReplace'))\r\n)\r\n"
+                            }
+                          }
+                        }
+                      },
+                      "expression": "@items('Apply_to_each_Activity')?['textFormat']",
+                      "metadata": {
+                        "operationMetadataId": "2253ad0b-6cfa-40cc-a769-2333fb5f9f93"
+                      },
+                      "type": "Switch"
+                    }
+                  },
+                  "runAfter": {
+                    "Compose_textFormat": [
+                      "Succeeded"
+                    ]
+                  },
+                  "else": {
+                    "actions": {
+                      "Set_varTextConvertedFromMessage_plaintext": {
+                        "runAfter": {},
+                        "metadata": {
+                          "operationMetadataId": "582cf0bc-6b89-424b-a7a1-eca64fb3dbca"
+                        },
+                        "type": "SetVariable",
+                        "inputs": {
+                          "name": "varTextConvertedFromMessage",
+                          "value": "@replace(\r\n  replace(\r\n    variables('varJSONMessageBlock'),\r\n    variables('varRoleStringReplace'),\r\n    if(\r\n      equals(\r\n        items('Apply_to_each_Activity')?['from']?['role'],\r\n        variables('varRoleBot')),\r\n        'agent','user'\r\n    )\r\n  ),\r\n  variables('varTextStringReplace'),\r\n  replace(items('Apply_to_each_Activity')?['text'],'''','')\r\n)"
+                        }
+                      }
+                    }
+                  },
                   "expression": {
                     "and": [
                       {
@@ -218,116 +309,60 @@
                       }
                     ]
                   },
+                  "metadata": {
+                    "operationMetadataId": "42929e85-8690-4b18-940e-f8bd75b1a27d"
+                  },
+                  "type": "If"
+                },
+                "Condition_Bot_talking_first_on_round_1": {
                   "actions": {
-                    "Switch_textFormat": {
-                      "type": "Switch",
-                      "expression": "@items('Apply_to_each_Activity')?['textFormat']",
-                      "default": {
-                        "actions": {
-                          "Set_varTextConvertedFromMessage_all_others": {
-                            "type": "SetVariable",
-                            "inputs": {
-                              "name": "varTextConvertedFromMessage",
-                              "value": "@replace(\r\n  replace(\r\n    variables('varJSONMessageBlock'),\r\n    variables('varRoleStringReplace'),\r\n    if(\r\n      equals(\r\n        items('Apply_to_each_Activity')?['from']?['role'],\r\n        variables('varRoleBot')),\r\n        'agent','user'\r\n    )\r\n  ),\r\n  variables('varTextStringReplace'),\r\n  replace(items('Apply_to_each_Activity')?['text'],'''',\r\n       variables('varSingleQuoteReplace'))\r\n)\r\n"
-                            },
-                            "metadata": {
-                              "operationMetadataId": "c80a796c-27b1-4c7d-9b10-ec9bf554dada"
-                            }
-                          }
-                        }
+                    "Set_varBotIsGreeting_true": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "77a74ac3-90f7-440a-a33c-4d570ebf8f04"
                       },
-                      "cases": {
-                        "Case_plain": {
-                          "actions": {
-                            "Set_varTextConvertedFromMessage_plain_": {
-                              "type": "SetVariable",
-                              "inputs": {
-                                "name": "varTextConvertedFromMessage",
-                                "value": "@replace(\r\n  replace(\r\n    variables('varJSONMessageBlock'),\r\n    variables('varRoleStringReplace'),\r\n    if(\r\n      equals(\r\n        items('Apply_to_each_Activity')?['from']?['role'],\r\n        variables('varRoleBot')),\r\n        'agent','user'\r\n    )\r\n  ),\r\n  variables('varTextStringReplace'),\r\n  replace(items('Apply_to_each_Activity')?['text'],'''',\r\n       variables('varSingleQuoteReplace'))\r\n)\r\n"
-                              },
-                              "metadata": {
-                                "operationMetadataId": "d7daa47a-fb9c-46c5-b57e-d5fa09c5e6d9"
-                              }
-                            }
-                          },
-                          "case": "plain"
-                        },
-                        "Case_markdown": {
-                          "actions": {
-                            "Run_CustomPromptConvertMarkdownToPlainText": {
-                              "type": "OpenApiConnection",
-                              "inputs": {
-                                "parameters": {
-                                  "recordId": "d5348810-df80-4488-89d0-7d59b2b9af26",
-                                  "item/requestv2/markdownText": "@items('Apply_to_each_Activity')?['text']"
-                                },
-                                "host": {
-                                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
-                                  "operationId": "aibuilderpredict_customprompt",
-                                  "connectionName": "shared_commondataserviceforapps_1"
-                                }
-                              },
-                              "metadata": {
-                                "flowSystemMetadata": {
-                                  "portalOperationId": "aibuilderpredict_customprompt",
-                                  "portalOperationGroup": "aibuilder",
-                                  "portalOperationApiDisplayNameOverride": "AI Builder",
-                                  "portalOperationIconOverride": "https://content.powerapps.com/resource/makerx/static/pauto/images/designeroperations/aiBuilderNew.51dbdb6b.png",
-                                  "portalOperationBrandColorOverride": "#0A76C4",
-                                  "portalOperationApiTierOverride": "Standard"
-                                },
-                                "operationMetadataId": "c52f6293-027c-40cc-a3b5-cf7d92a21ae7"
-                              }
-                            },
-                            "Set_varTextConvertedFromMessage_from_Markdown": {
-                              "type": "SetVariable",
-                              "inputs": {
-                                "name": "varTextConvertedFromMessage",
-                                "value": "@replace(\r\n  replace(\r\n    variables('varJSONMessageBlock'),\r\n    variables('varRoleStringReplace'),\r\n    if(\r\n      equals(\r\n        items('Apply_to_each_Activity')?['from']?['role'],\r\n        variables('varRoleBot')),\r\n        'agent','user'\r\n    )\r\n  ),\r\n  variables('varTextStringReplace'),\r\n  replace(\r\n    outputs('Run_CustomPromptConvertMarkdownToPlainText')?['body/responsev2/predictionOutput/text'],\r\n    '''',\r\n    variables('varSingleQuoteReplace'))\r\n)"
-                              },
-                              "runAfter": {
-                                "Run_CustomPromptConvertMarkdownToPlainText": [
-                                  "Succeeded"
-                                ]
-                              },
-                              "metadata": {
-                                "operationMetadataId": "226ca467-e192-44bf-b8bd-bf6d3ac72135"
-                              }
-                            }
-                          },
-                          "case": "markdown"
-                        }
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varBotIsGreeting",
+                        "value": true
+                      }
+                    },
+                    "Set_varQueryJSON_Bot_is_greeting": {
+                      "runAfter": {
+                        "Set_varBotIsGreeting_true": [
+                          "Succeeded"
+                        ]
                       },
                       "metadata": {
-                        "operationMetadataId": "2253ad0b-6cfa-40cc-a769-2333fb5f9f93"
+                        "operationMetadataId": "26f4eef5-4dd1-44dc-a097-12d6580c175f"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varQueryJSON",
+                        "value": "@variables('varTextConvertedFromMessage')"
                       }
-                    }
-                  },
-                  "else": {
-                    "actions": {
-                      "Set_varTextConvertedFromMessage_plaintext": {
-                        "type": "SetVariable",
-                        "inputs": {
-                          "name": "varTextConvertedFromMessage",
-                          "value": "@replace(\r\n  replace(\r\n    variables('varJSONMessageBlock'),\r\n    variables('varRoleStringReplace'),\r\n    if(\r\n      equals(\r\n        items('Apply_to_each_Activity')?['from']?['role'],\r\n        variables('varRoleBot')),\r\n        'agent','user'\r\n    )\r\n  ),\r\n  variables('varTextStringReplace'),\r\n  replace(items('Apply_to_each_Activity')?['text'],'''','')\r\n)"
-                        },
-                        "metadata": {
-                          "operationMetadataId": "582cf0bc-6b89-424b-a7a1-eca64fb3dbca"
-                        }
+                    },
+                    "Set_varWhoWasMessaging_to_Bot_1st_round": {
+                      "runAfter": {
+                        "Set_varQueryJSON_Bot_is_greeting": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "cafd7c0c-30be-4387-bfc9-6faac2c91ecb"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varWhoWasMessaging",
+                        "value": "@variables('varRoleBot')"
                       }
                     }
                   },
                   "runAfter": {
-                    "Compose_textFormat": [
+                    "Condition_textFormat_is_Null_or_Not_Null": [
                       "Succeeded"
                     ]
                   },
-                  "metadata": {
-                    "operationMetadataId": "42929e85-8690-4b18-940e-f8bd75b1a27d"
-                  }
-                },
-                "Condition_Bot_talking_first_on_round_1": {
-                  "type": "If",
                   "expression": {
                     "and": [
                       {
@@ -344,63 +379,12 @@
                       }
                     ]
                   },
-                  "actions": {
-                    "Set_varBotIsGreeting_true": {
-                      "type": "SetVariable",
-                      "inputs": {
-                        "name": "varBotIsGreeting",
-                        "value": true
-                      },
-                      "metadata": {
-                        "operationMetadataId": "77a74ac3-90f7-440a-a33c-4d570ebf8f04"
-                      }
-                    },
-                    "Set_varQueryJSON_Bot_is_greeting": {
-                      "type": "SetVariable",
-                      "inputs": {
-                        "name": "varQueryJSON",
-                        "value": "@variables('varTextConvertedFromMessage')"
-                      },
-                      "runAfter": {
-                        "Set_varBotIsGreeting_true": [
-                          "Succeeded"
-                        ]
-                      },
-                      "metadata": {
-                        "operationMetadataId": "26f4eef5-4dd1-44dc-a097-12d6580c175f"
-                      }
-                    },
-                    "Set_varWhoWasMessaging_to_Bot_1st_round": {
-                      "type": "SetVariable",
-                      "inputs": {
-                        "name": "varWhoWasMessaging",
-                        "value": "@variables('varRoleBot')"
-                      },
-                      "runAfter": {
-                        "Set_varQueryJSON_Bot_is_greeting": [
-                          "Succeeded"
-                        ]
-                      },
-                      "metadata": {
-                        "operationMetadataId": "cafd7c0c-30be-4387-bfc9-6faac2c91ecb"
-                      }
-                    }
-                  },
-                  "else": {
-                    "actions": {}
-                  },
-                  "runAfter": {
-                    "Condition_textFormat_is_Null_or_Not_Null": [
-                      "Succeeded"
-                    ]
-                  },
                   "metadata": {
                     "operationMetadataId": "29c5bb33-b0e1-438c-ae8d-bb79294486e6"
-                  }
+                  },
+                  "type": "If"
                 },
                 "Compose_whoWasMessaging": {
-                  "type": "Compose",
-                  "inputs": "@variables('varWhoWasMessaging')",
                   "runAfter": {
                     "Condition_Bot_talking_first_on_round_1": [
                       "Succeeded"
@@ -408,11 +392,11 @@
                   },
                   "metadata": {
                     "operationMetadataId": "0e19ea70-5f2c-4835-985d-f387c45f5780"
-                  }
+                  },
+                  "type": "Compose",
+                  "inputs": "@variables('varWhoWasMessaging')"
                 },
                 "Compose_Body_Role_test": {
-                  "type": "Compose",
-                  "inputs": "@items('Apply_to_each_Activity')?['from']?['role']",
                   "runAfter": {
                     "Compose_whoWasMessaging": [
                       "Succeeded"
@@ -420,11 +404,11 @@
                   },
                   "metadata": {
                     "operationMetadataId": "12f6317f-534f-4d89-b581-1ecae7162a88"
-                  }
+                  },
+                  "type": "Compose",
+                  "inputs": "@items('Apply_to_each_Activity')?['from']?['role']"
                 },
                 "Compose_varBotIsGreeting": {
-                  "type": "Compose",
-                  "inputs": "@variables('varBotIsGreeting')",
                   "runAfter": {
                     "Compose_Body_Role_test": [
                       "Succeeded"
@@ -432,10 +416,107 @@
                   },
                   "metadata": {
                     "operationMetadataId": "4d0f2e55-f348-4ff0-8884-f290c13b2e5d"
-                  }
+                  },
+                  "type": "Compose",
+                  "inputs": "@variables('varBotIsGreeting')"
                 },
                 "Condition_varWhoWasMessaging_is_Bot_-_now_is_User_-_bot_not_greeting": {
-                  "type": "If",
+                  "actions": {
+                    "Set_varResponseJSON_blank": {
+                      "runAfter": {
+                        "Append_varResponseJSON_to_varQueryJSON": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "263c8c0c-1e4b-43f9-9158-5d00d836299d"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varResponseJSON",
+                        "value": "@null"
+                      }
+                    },
+                    "Append_varResponseJSON_to_varQueryJSON": {
+                      "runAfter": {
+                        "(re)Set_varThisPromptOnlyJSON_blank": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "32787219-6aa5-4c05-9d47-523ac7473fcd"
+                      },
+                      "type": "AppendToStringVariable",
+                      "inputs": {
+                        "name": "varQueryJSON",
+                        "value": "@variables('varResponseJSON')"
+                      }
+                    },
+                    "Compose_CHILDFLOW_varQueryJSON": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "c35cfc74-001f-4634-b234-827f6e951248"
+                      },
+                      "type": "Compose",
+                      "inputs": "@variables('varQueryJSON')"
+                    },
+                    "Compose_CHILDFLOW_varResponseJSON": {
+                      "runAfter": {
+                        "Compose_CHILDFLOW_varQueryJSON": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "217ba39c-376e-48cb-a594-d222b23b8791"
+                      },
+                      "type": "Compose",
+                      "inputs": "@variables('varResponseJSON')"
+                    },
+                    "Run_a_Child_Flow": {
+                      "runAfter": {
+                        "Compose_CHILDFLOW_varResponseJSON": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "cb1fb50f-df3a-46cf-b67d-4dad72dcfb70"
+                      },
+                      "type": "Workflow",
+                      "inputs": {
+                        "host": {
+                          "workflowReferenceName": "53f54677-ec55-f011-877a-000d3a1ee563"
+                        },
+                        "body": {
+                          "text": "@triggerOutputs()?['body/conversationtranscriptid']",
+                          "text_1": "@items('Apply_to_each_Activity')?['id']",
+                          "text_2": "@variables('varQueryJSON')",
+                          "number": "@variables('varDebugCount')",
+                          "text_3": "@variables('varResponseJSON')",
+                          "text_4": "@variables('varThisPromptOnlyJSON')"
+                        }
+                      }
+                    },
+                    "(re)Set_varThisPromptOnlyJSON_blank": {
+                      "runAfter": {
+                        "Run_a_Child_Flow": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "cfe5285a-351f-4789-b7c9-ba685ec41971"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varThisPromptOnlyJSON",
+                        "value": "@{null}"
+                      }
+                    }
+                  },
+                  "runAfter": {
+                    "Compose_varBotIsGreeting": [
+                      "Succeeded"
+                    ]
+                  },
                   "expression": {
                     "and": [
                       {
@@ -458,127 +539,14 @@
                       }
                     ]
                   },
-                  "actions": {
-                    "Set_varResponseJSON_blank": {
-                      "type": "SetVariable",
-                      "inputs": {
-                        "name": "varResponseJSON",
-                        "value": "@null"
-                      },
-                      "runAfter": {
-                        "Append_varResponseJSON_to_varQueryJSON": [
-                          "Succeeded"
-                        ]
-                      },
-                      "metadata": {
-                        "operationMetadataId": "263c8c0c-1e4b-43f9-9158-5d00d836299d"
-                      }
-                    },
-                    "Append_varResponseJSON_to_varQueryJSON": {
-                      "type": "AppendToStringVariable",
-                      "inputs": {
-                        "name": "varQueryJSON",
-                        "value": "@variables('varResponseJSON')"
-                      },
-                      "runAfter": {
-                        "(re)Set_varThisPromptOnlyJSON_blank": [
-                          "Succeeded"
-                        ]
-                      },
-                      "metadata": {
-                        "operationMetadataId": "32787219-6aa5-4c05-9d47-523ac7473fcd"
-                      }
-                    },
-                    "Compose_CHILDFLOW_varQueryJSON": {
-                      "type": "Compose",
-                      "inputs": "@variables('varQueryJSON')",
-                      "metadata": {
-                        "operationMetadataId": "c35cfc74-001f-4634-b234-827f6e951248"
-                      }
-                    },
-                    "Compose_CHILDFLOW_varResponseJSON": {
-                      "type": "Compose",
-                      "inputs": "@variables('varResponseJSON')",
-                      "runAfter": {
-                        "Compose_CHILDFLOW_varQueryJSON": [
-                          "Succeeded"
-                        ]
-                      },
-                      "metadata": {
-                        "operationMetadataId": "217ba39c-376e-48cb-a594-d222b23b8791"
-                      }
-                    },
-                    "Run_a_Child_Flow": {
-                      "type": "Workflow",
-                      "inputs": {
-                        "host": {
-                          "workflowReferenceName": "53f54677-ec55-f011-877a-000d3a1ee563"
-                        },
-                        "body": {
-                          "text": "@triggerOutputs()?['body/conversationtranscriptid']",
-                          "text_1": "@items('Apply_to_each_Activity')?['id']",
-                          "text_2": "@variables('varQueryJSON')",
-                          "number": "@variables('varDebugCount')",
-                          "text_3": "@variables('varResponseJSON')",
-                          "text_4": "@variables('varThisPromptOnlyJSON')"
-                        }
-                      },
-                      "runAfter": {
-                        "Compose_CHILDFLOW_varResponseJSON": [
-                          "Succeeded"
-                        ]
-                      },
-                      "metadata": {
-                        "operationMetadataId": "cb1fb50f-df3a-46cf-b67d-4dad72dcfb70"
-                      }
-                    },
-                    "(re)Set_varThisPromptOnlyJSON_blank": {
-                      "type": "SetVariable",
-                      "inputs": {
-                        "name": "varThisPromptOnlyJSON",
-                        "value": "@{null}"
-                      },
-                      "runAfter": {
-                        "Run_a_Child_Flow": [
-                          "Succeeded"
-                        ]
-                      },
-                      "metadata": {
-                        "operationMetadataId": "cfe5285a-351f-4789-b7c9-ba685ec41971"
-                      }
-                    }
-                  },
-                  "else": {
-                    "actions": {}
-                  },
-                  "runAfter": {
-                    "Compose_varBotIsGreeting": [
-                      "Succeeded"
-                    ]
-                  },
                   "metadata": {
                     "operationMetadataId": "5ca2406b-a47a-4f1a-acdc-528aca45037b"
-                  }
+                  },
+                  "type": "If"
                 },
                 "Condition_User_is_messaging_-_if_not_then_bot_is": {
-                  "type": "If",
-                  "expression": {
-                    "or": [
-                      {
-                        "equals": [
-                          "@items('Apply_to_each_Activity')?['from']?['role']",
-                          "@variables('varRoleUser')"
-                        ]
-                      }
-                    ]
-                  },
                   "actions": {
                     "Set_varBotIsGreeting_-_Bot_No_Longer_Greeting": {
-                      "type": "SetVariable",
-                      "inputs": {
-                        "name": "varBotIsGreeting",
-                        "value": false
-                      },
                       "runAfter": {
                         "append_2_varQueryJSON": [
                           "Succeeded"
@@ -586,24 +554,25 @@
                       },
                       "metadata": {
                         "operationMetadataId": "8adefa0d-8a1f-4df3-9d0a-49d1a6f6489b"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varBotIsGreeting",
+                        "value": false
                       }
                     },
                     "Append_2_varThisPromptOnlyJSON": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "475d1301-8d77-40d6-9fa4-922fc88472a5"
+                      },
                       "type": "AppendToStringVariable",
                       "inputs": {
                         "name": "varThisPromptOnlyJSON",
                         "value": "@variables('varTextConvertedFromMessage')"
-                      },
-                      "metadata": {
-                        "operationMetadataId": "475d1301-8d77-40d6-9fa4-922fc88472a5"
                       }
                     },
                     "append_2_varQueryJSON": {
-                      "type": "AppendToStringVariable",
-                      "inputs": {
-                        "name": "varQueryJSON",
-                        "value": "@variables('varTextConvertedFromMessage')"
-                      },
                       "runAfter": {
                         "Append_2_varThisPromptOnlyJSON": [
                           "Succeeded"
@@ -611,13 +580,36 @@
                       },
                       "metadata": {
                         "operationMetadataId": "659fa2e7-205f-4650-8b83-1d04f00e1d30"
+                      },
+                      "type": "AppendToStringVariable",
+                      "inputs": {
+                        "name": "varQueryJSON",
+                        "value": "@variables('varTextConvertedFromMessage')"
                       }
                     }
+                  },
+                  "runAfter": {
+                    "Condition_varWhoWasMessaging_is_Bot_-_now_is_User_-_bot_not_greeting": [
+                      "Succeeded"
+                    ]
                   },
                   "else": {
                     "actions": {
                       "Condition_varBotIsGreeting_Not_True": {
-                        "type": "If",
+                        "actions": {
+                          "append_2_varResponseJSON": {
+                            "runAfter": {},
+                            "metadata": {
+                              "operationMetadataId": "659fa2e7-205f-4650-8b83-1d04f00e1d30"
+                            },
+                            "type": "AppendToStringVariable",
+                            "inputs": {
+                              "name": "varResponseJSON",
+                              "value": "@variables('varTextConvertedFromMessage')"
+                            }
+                          }
+                        },
+                        "runAfter": {},
                         "expression": {
                           "and": [
                             {
@@ -628,42 +620,29 @@
                             }
                           ]
                         },
-                        "actions": {
-                          "append_2_varResponseJSON": {
-                            "type": "AppendToStringVariable",
-                            "inputs": {
-                              "name": "varResponseJSON",
-                              "value": "@variables('varTextConvertedFromMessage')"
-                            },
-                            "metadata": {
-                              "operationMetadataId": "659fa2e7-205f-4650-8b83-1d04f00e1d30"
-                            }
-                          }
-                        },
-                        "else": {
-                          "actions": {}
-                        },
                         "metadata": {
                           "operationMetadataId": "00b908ec-b9a6-45a5-ad64-b4af995cc038"
-                        }
+                        },
+                        "type": "If"
                       }
                     }
                   },
-                  "runAfter": {
-                    "Condition_varWhoWasMessaging_is_Bot_-_now_is_User_-_bot_not_greeting": [
-                      "Succeeded"
+                  "expression": {
+                    "or": [
+                      {
+                        "equals": [
+                          "@items('Apply_to_each_Activity')?['from']?['role']",
+                          "@variables('varRoleUser')"
+                        ]
+                      }
                     ]
                   },
                   "metadata": {
                     "operationMetadataId": "ee6fce8c-8f65-4e4e-ac3a-c7ebbe7355e9"
-                  }
+                  },
+                  "type": "If"
                 },
                 "Set_variable_varWhoWasMessaging": {
-                  "type": "SetVariable",
-                  "inputs": {
-                    "name": "varWhoWasMessaging",
-                    "value": "@items('Apply_to_each_Activity')?['from']?['role']"
-                  },
                   "runAfter": {
                     "Condition_User_is_messaging_-_if_not_then_bot_is": [
                       "Succeeded"
@@ -671,14 +650,14 @@
                   },
                   "metadata": {
                     "operationMetadataId": "63753930-15d3-4709-a478-d9b89bed53fe"
+                  },
+                  "type": "SetVariable",
+                  "inputs": {
+                    "name": "varWhoWasMessaging",
+                    "value": "@items('Apply_to_each_Activity')?['from']?['role']"
                   }
                 },
                 "Set_varRunId": {
-                  "type": "SetVariable",
-                  "inputs": {
-                    "name": "varRundId",
-                    "value": "@items('Apply_to_each_Activity')?['id']"
-                  },
                   "runAfter": {
                     "Set_variable_varWhoWasMessaging": [
                       "Succeeded"
@@ -686,6 +665,11 @@
                   },
                   "metadata": {
                     "operationMetadataId": "84719e5b-f2cf-4349-b571-801109d021ac"
+                  },
+                  "type": "SetVariable",
+                  "inputs": {
+                    "name": "varRundId",
+                    "value": "@items('Apply_to_each_Activity')?['id']"
                   }
                 }
               },
@@ -696,11 +680,10 @@
               },
               "metadata": {
                 "operationMetadataId": "01144904-ebb1-4c58-a6f5-41cd343dc5b7"
-              }
+              },
+              "type": "Foreach"
             },
             "Compose_varWhoWasMessaging_end": {
-              "type": "Compose",
-              "inputs": "@variables('varWhoWasMessaging')",
               "runAfter": {
                 "Apply_to_each_Activity": [
                   "Succeeded"
@@ -708,14 +691,11 @@
               },
               "metadata": {
                 "operationMetadataId": "0cf43c4c-68ae-42c5-8b52-e748367c01d6"
-              }
+              },
+              "type": "Compose",
+              "inputs": "@variables('varWhoWasMessaging')"
             },
             "Filter_array_ParseJSONConvo": {
-              "type": "Query",
-              "inputs": {
-                "from": "@body('ParseJSONConvo')?['activities']",
-                "where": "@equals(item()?['type'], 'message')"
-              },
               "runAfter": {
                 "ParseJSONConvo": [
                   "Succeeded"
@@ -723,9 +703,22 @@
               },
               "metadata": {
                 "operationMetadataId": "7976bf56-d7f9-423f-b486-47287eddc367"
+              },
+              "type": "Query",
+              "inputs": {
+                "from": "@body('ParseJSONConvo')?['activities']",
+                "where": "@equals(item()?['type'], 'message')"
               }
             },
             "Run_Child_Flow_for_Last_Run": {
+              "runAfter": {
+                "Compose_varWhoWasMessaging_end": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "cb1fb50f-df3a-46cf-b67d-4dad72dcfb70"
+              },
               "type": "Workflow",
               "inputs": {
                 "host": {
@@ -739,31 +732,9 @@
                   "text_3": "@variables('varResponseJSON')",
                   "text_4": "@variables('varThisPromptOnlyJSON')"
                 }
-              },
-              "runAfter": {
-                "Compose_varWhoWasMessaging_end": [
-                  "Succeeded"
-                ]
-              },
-              "metadata": {
-                "operationMetadataId": "cb1fb50f-df3a-46cf-b67d-4dad72dcfb70"
               }
             },
             "update_ConversationTranscripts_with_formatted_json": {
-              "type": "OpenApiConnection",
-              "inputs": {
-                "parameters": {
-                  "entityName": "conversationtranscripts",
-                  "recordId": "@triggerOutputs()?['body/conversationtranscriptid']",
-                  "item/veh_formattedconversation": "@concat('[',replace(substring(variables('varQueryJSON'),2),variables('varSingleQuoteReplace'),''''),replace(variables('varResponseJSON'), variables('varSingleQuoteReplace'),''''),']')",
-                  "item/veh_title": "@replace(outputs('Run_prompt_get_Title')?['body/responsev2/predictionOutput/text'],'\"','')"
-                },
-                "host": {
-                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
-                  "operationId": "UpdateOnlyRecord",
-                  "connectionName": "shared_commondataserviceforapps_1"
-                }
-              },
               "runAfter": {
                 "Run_prompt_get_Title": [
                   "Succeeded"
@@ -771,21 +742,24 @@
               },
               "metadata": {
                 "operationMetadataId": "7a1463dd-5702-4300-931b-40d47653892a"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps_2",
+                  "operationId": "UpdateOnlyRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "conversationtranscripts",
+                  "recordId": "@triggerOutputs()?['body/conversationtranscriptid']",
+                  "item/veh_formattedconversation": "@concat('[',replace(substring(variables('varQueryJSON'),2),variables('varSingleQuoteReplace'),''''),replace(variables('varResponseJSON'), variables('varSingleQuoteReplace'),''''),']')",
+                  "item/veh_title": "@replace(outputs('Run_prompt_get_Title')?['body/responsev2/predictionOutput/text'],'\"','')"
+                },
+                "authentication": "@parameters('$authentication')"
               }
             },
             "Run_prompt_get_Title": {
-              "type": "OpenApiConnection",
-              "inputs": {
-                "parameters": {
-                  "recordId": "86ffd107-d265-4b67-8684-506fe5477b7b",
-                  "item/requestv2/varJSONInput": "@{variables('varQueryJSON')}@{variables('varResponseJSON')}"
-                },
-                "host": {
-                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
-                  "operationId": "aibuilderpredict_customprompt",
-                  "connectionName": "shared_commondataserviceforapps_1"
-                }
-              },
               "runAfter": {
                 "Run_Child_Flow_for_Last_Run": [
                   "Succeeded"
@@ -801,22 +775,51 @@
                   "portalOperationBrandColorOverride": "#0A76C4",
                   "portalOperationApiTierOverride": "Standard"
                 }
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps_2",
+                  "operationId": "aibuilderpredict_customprompt",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "recordId": "86ffd107-d265-4b67-8684-506fe5477b7b",
+                  "item/requestv2/varJSONInput": "@{variables('varQueryJSON')}@{variables('varResponseJSON')}"
+                },
+                "authentication": "@parameters('$authentication')"
               }
             }
-          },
-          "else": {
-            "actions": {}
           },
           "runAfter": {
             "Init_varTextConvertedFromMessage": [
               "Succeeded"
             ]
           },
+          "expression": {
+            "and": [
+              {
+                "equals": [
+                  "@triggerOutputs()?['body/schematype']",
+                  "powervirtualagents"
+                ]
+              }
+            ]
+          },
           "metadata": {
             "operationMetadataId": "d8c15ba6-c1eb-4be7-9e15-cd2022e92a0c"
-          }
+          },
+          "type": "If"
         },
         "Initialize_varRolebot": {
+          "runAfter": {
+            "Initialize_varDebugCount": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "63bde683-df04-4ecd-b1e1-c9bc18557bfd"
+          },
           "type": "InitializeVariable",
           "inputs": {
             "variables": [
@@ -826,17 +829,17 @@
                 "value": 0
               }
             ]
-          },
+          }
+        },
+        "Initialize_varRoleUser": {
           "runAfter": {
-            "Initialize_varDebugCount": [
+            "Initialize_varRolebot": [
               "Succeeded"
             ]
           },
           "metadata": {
-            "operationMetadataId": "63bde683-df04-4ecd-b1e1-c9bc18557bfd"
-          }
-        },
-        "Initialize_varRoleUser": {
+            "operationMetadataId": "58e01adb-0461-459a-8b7d-cf33e9d94bd3"
+          },
           "type": "InitializeVariable",
           "inputs": {
             "variables": [
@@ -846,17 +849,17 @@
                 "value": 1
               }
             ]
-          },
+          }
+        },
+        "Initialize_varWhoWasMessaging_to_neither_bot_or_user": {
           "runAfter": {
-            "Initialize_varRolebot": [
+            "Initialize_varRoleUser": [
               "Succeeded"
             ]
           },
           "metadata": {
-            "operationMetadataId": "58e01adb-0461-459a-8b7d-cf33e9d94bd3"
-          }
-        },
-        "Initialize_varWhoWasMessaging_to_neither_bot_or_user": {
+            "operationMetadataId": "e8ef0e6f-8f24-4ddd-9fec-56ea5e0badff"
+          },
           "type": "InitializeVariable",
           "inputs": {
             "variables": [
@@ -866,17 +869,17 @@
                 "value": 2
               }
             ]
-          },
+          }
+        },
+        "init_varJSONMessageBlock": {
           "runAfter": {
-            "Initialize_varRoleUser": [
+            "init_varTextStringReplace": [
               "Succeeded"
             ]
           },
           "metadata": {
-            "operationMetadataId": "e8ef0e6f-8f24-4ddd-9fec-56ea5e0badff"
-          }
-        },
-        "init_varJSONMessageBlock": {
+            "operationMetadataId": "09fcea07-ef79-4250-89ad-26468396b50e"
+          },
           "type": "InitializeVariable",
           "inputs": {
             "variables": [
@@ -886,17 +889,17 @@
                 "value": "\t,{\n      'role': '@{variables('varRoleStringReplace')}',\n      'content': [\n        {\n          'type': 'text',\n          'text': '@{variables('varTextStringReplace')}'\n        }\n      ]\n    }"
               }
             ]
-          },
+          }
+        },
+        "init_varRoleStringReplace": {
           "runAfter": {
-            "init_varTextStringReplace": [
+            "Initialize_varWhoWasMessaging_to_neither_bot_or_user": [
               "Succeeded"
             ]
           },
           "metadata": {
-            "operationMetadataId": "09fcea07-ef79-4250-89ad-26468396b50e"
-          }
-        },
-        "init_varRoleStringReplace": {
+            "operationMetadataId": "b526efe4-f357-49da-a502-882f24bd75cf"
+          },
           "type": "InitializeVariable",
           "inputs": {
             "variables": [
@@ -906,17 +909,17 @@
                 "value": "***!/!/!***"
               }
             ]
-          },
+          }
+        },
+        "init_varTextStringReplace": {
           "runAfter": {
-            "Initialize_varWhoWasMessaging_to_neither_bot_or_user": [
+            "init_varRoleStringReplace": [
               "Succeeded"
             ]
           },
           "metadata": {
-            "operationMetadataId": "b526efe4-f357-49da-a502-882f24bd75cf"
-          }
-        },
-        "init_varTextStringReplace": {
+            "operationMetadataId": "7edb20e7-2311-40e9-b0af-a5c02a63d658"
+          },
           "type": "InitializeVariable",
           "inputs": {
             "variables": [
@@ -926,17 +929,17 @@
                 "value": "***!\\!\\!***"
               }
             ]
-          },
+          }
+        },
+        "init_varQueryJSON": {
           "runAfter": {
-            "init_varRoleStringReplace": [
+            "Init_varSingleQuoteReplace": [
               "Succeeded"
             ]
           },
           "metadata": {
-            "operationMetadataId": "7edb20e7-2311-40e9-b0af-a5c02a63d658"
-          }
-        },
-        "init_varQueryJSON": {
+            "operationMetadataId": "29a0ee3d-8506-4d86-a2c6-afdde3b7740c"
+          },
           "type": "InitializeVariable",
           "inputs": {
             "variables": [
@@ -945,17 +948,17 @@
                 "type": "string"
               }
             ]
-          },
+          }
+        },
+        "Initialize_varDebugCount": {
           "runAfter": {
-            "Init_varSingleQuoteReplace": [
+            "Initialize_varBotIsGreeting_false": [
               "Succeeded"
             ]
           },
           "metadata": {
-            "operationMetadataId": "29a0ee3d-8506-4d86-a2c6-afdde3b7740c"
-          }
-        },
-        "Initialize_varDebugCount": {
+            "operationMetadataId": "b678fd1d-c4d2-494f-b10c-6c735c8bdc9d"
+          },
           "type": "InitializeVariable",
           "inputs": {
             "variables": [
@@ -965,17 +968,17 @@
                 "value": 0
               }
             ]
-          },
+          }
+        },
+        "init_varResponseJSON": {
           "runAfter": {
-            "Initialize_varBotIsGreeting_false": [
+            "Initialize_varThisPromptOnlyJSON": [
               "Succeeded"
             ]
           },
           "metadata": {
-            "operationMetadataId": "b678fd1d-c4d2-494f-b10c-6c735c8bdc9d"
-          }
-        },
-        "init_varResponseJSON": {
+            "operationMetadataId": "5c454884-dafa-4536-8cae-c58b7bc28ae5"
+          },
           "type": "InitializeVariable",
           "inputs": {
             "variables": [
@@ -984,17 +987,13 @@
                 "type": "string"
               }
             ]
-          },
-          "runAfter": {
-            "Initialize_varThisPromptOnlyJSON": [
-              "Succeeded"
-            ]
-          },
-          "metadata": {
-            "operationMetadataId": "5c454884-dafa-4536-8cae-c58b7bc28ae5"
           }
         },
         "Initialize_varBotIsGreeting_false": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "d08e31a9-857b-416d-85c1-78fb23433e0f"
+          },
           "type": "InitializeVariable",
           "inputs": {
             "variables": [
@@ -1004,13 +1003,17 @@
                 "value": false
               }
             ]
-          },
-          "runAfter": {},
-          "metadata": {
-            "operationMetadataId": "d08e31a9-857b-416d-85c1-78fb23433e0f"
           }
         },
         "Initialize_varThisPromptOnlyJSON": {
+          "runAfter": {
+            "init_varQueryJSON": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "f73805f0-0a98-4a9e-bf2d-34003706d666"
+          },
           "type": "InitializeVariable",
           "inputs": {
             "variables": [
@@ -1019,17 +1022,17 @@
                 "type": "string"
               }
             ]
-          },
+          }
+        },
+        "Init_varRunId": {
           "runAfter": {
-            "init_varQueryJSON": [
+            "init_varResponseJSON": [
               "Succeeded"
             ]
           },
           "metadata": {
-            "operationMetadataId": "f73805f0-0a98-4a9e-bf2d-34003706d666"
-          }
-        },
-        "Init_varRunId": {
+            "operationMetadataId": "93f374f8-3c14-4b85-9385-0bb0f840206f"
+          },
           "type": "InitializeVariable",
           "inputs": {
             "variables": [
@@ -1038,17 +1041,17 @@
                 "type": "string"
               }
             ]
-          },
+          }
+        },
+        "Init_varTextConvertedFromMessage": {
           "runAfter": {
-            "init_varResponseJSON": [
+            "Init_varRunId": [
               "Succeeded"
             ]
           },
           "metadata": {
-            "operationMetadataId": "93f374f8-3c14-4b85-9385-0bb0f840206f"
-          }
-        },
-        "Init_varTextConvertedFromMessage": {
+            "operationMetadataId": "4a0d61bd-e44c-44e9-bd37-df2eb8674f7b"
+          },
           "type": "InitializeVariable",
           "inputs": {
             "variables": [
@@ -1057,19 +1060,18 @@
                 "type": "string"
               }
             ]
-          },
+          }
+        },
+        "Init_varSingleQuoteReplace": {
           "runAfter": {
-            "Init_varRunId": [
+            "init_varJSONMessageBlock": [
               "Succeeded"
             ]
           },
           "metadata": {
-            "operationMetadataId": "4a0d61bd-e44c-44e9-bd37-df2eb8674f7b"
-          }
-        },
-        "Init_varSingleQuoteReplace": {
+            "operationMetadataId": "c70b31d6-0f35-4930-a3d3-47f797a5e236"
+          },
           "type": "InitializeVariable",
-          "description": "Used to replace single quotes inside actual text with non-system delimiter so converting to JSON will work. Will escape the single-quote in the Child-flow",
           "inputs": {
             "variables": [
               {
@@ -1079,19 +1081,12 @@
               }
             ]
           },
-          "runAfter": {
-            "init_varJSONMessageBlock": [
-              "Succeeded"
-            ]
-          },
-          "metadata": {
-            "operationMetadataId": "c70b31d6-0f35-4930-a3d3-47f797a5e236"
-          }
+          "description": "Used to replace single quotes inside actual text with non-system delimiter so converting to JSON will work. Will escape the single-quote in the Child-flow"
         }
       },
       "outputs": {}
     },
-    "templateName": null
+    "templateName": ""
   },
   "schemaVersion": "1.0.0.0"
 }
