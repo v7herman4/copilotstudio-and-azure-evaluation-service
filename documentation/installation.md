@@ -229,7 +229,14 @@ Back on the tab with the custom connector, click on “Update connector” and t
 You are finished configuring the custom connector!
 
 ### Configure Other Power Platform items
+Ensure the two Power Automate Flows are turned on and the Plan is set to “Copilot Studio”.
 
+·         Analyze CPS Agent Convo on Convo Trx Create
+
+·         Child Flow - Request Evalutation - Synchronous v3
+<br><br>
+
+ [\[VH1\]](https://microsoft.sharepoint.com/teams/CopilotStudioCollaborations-ObservabilityServicewithCopilotStudioagents/Shared%20Documents/GitHub%20Repo%20Post.docx#_msoanchor_1)read
 ### Share the Canvas App
 
 The Power BI report contains an embedded Canvas App that must be shared with all users of the Power BI report. In order to share the app named “Prompt Response App PBI” with all users who will consume the report. For instructions on how to share a Canvas App see this article:
