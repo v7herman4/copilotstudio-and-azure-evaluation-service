@@ -175,54 +175,6 @@
       <statecode>0</statecode>
       <statuscode>1</statuscode>
     </connectionreference>
-    <connectionreference connectionreferencelogicalname="veh_sharedcommondataserviceforapps_6946b">
-      <connectionreferencedisplayname>Microsoft Dataverse CPSFDPAgentEvaluations-6946b</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
-      <iscustomizable>1</iscustomizable>
-      <promptingbehavior>0</promptingbehavior>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
-    <connectionreference connectionreferencelogicalname="veh_sharedcommondataserviceforapps_bc8bc">
-      <connectionreferencedisplayname>Microsoft Dataverse CPSFDPAgentEvaluations-bc8bc</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
-      <iscustomizable>1</iscustomizable>
-      <promptingbehavior>0</promptingbehavior>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
-    <connectionreference connectionreferencelogicalname="veh_sharedexcelonlinebusiness_59fb2">
-      <connectionreferencedisplayname>Excel Online (Business) CPSFDPAgentEvaluations-59fb2</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness</connectorid>
-      <iscustomizable>1</iscustomizable>
-      <promptingbehavior>0</promptingbehavior>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
-    <connectionreference connectionreferencelogicalname="veh_sharedfdp20agent20evaluations5f34d393299b7141935f26321d34753a16b_030d2">
-      <connectionreferencedisplayname>FDP Agent Evaluations CPSFDPAgentEvaluations-030d2</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_fdp-20agent-20evaluations-5f34d393299b714193-5f26321d34753a16b1</connectorid>
-      <iscustomizable>1</iscustomizable>
-      <promptingbehavior>0</promptingbehavior>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
-    <connectionreference connectionreferencelogicalname="veh_sharedmicrosoftcopilotstudio_5ea5d">
-      <connectionreferencedisplayname>Microsoft Copilot Studio CPSFDPAgentEvaluations-5ea5d</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_microsoftcopilotstudio</connectorid>
-      <iscustomizable>1</iscustomizable>
-      <promptingbehavior>0</promptingbehavior>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
-    <connectionreference connectionreferencelogicalname="veh_sharedteams_49636">
-      <connectionreferencedisplayname>Microsoft Teams CPSFDPAgentEvaluations-49636</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_teams</connectorid>
-      <iscustomizable>1</iscustomizable>
-      <promptingbehavior>0</promptingbehavior>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
     <connectionreference connectionreferencelogicalname="veh_sharedveh5fcps20azure20evaluation20service5f34d393299b714193_a4ea7">
       <connectionreferencedisplayname>CPS Azure Evaluation Service CPSFDPAgentEvaluations-a4ea7</connectionreferencedisplayname>
       <connectorid>/providers/Microsoft.PowerApps/apis/shared_veh-5fcps-20azure-20evaluation-20service-5f34d393299b714193</connectorid>
