@@ -25,7 +25,7 @@ Search for “azure ai foundry” in the search box and click on it from the res
 Click on “Create Resource”
   
 
-Figure 0‑2
+![Figure 0‑2](images/0-2.png)
 
 Select a valid Subscription
 
@@ -39,13 +39,13 @@ For the “Default project name”, enter in a project name with no spaces.
 
   
 
-Figure 0‑3
+![Figure 0‑3](images/0-3.png)
 
 On the “Network” tab, leave the selection “All networks” and click “Next”.
 
   
 
-Figure 0‑4
+![Figure 0‑4](images/0-4.png)
 
 On the “Identity” tab, leave the “System Assigned” selection and click “Next”
 
@@ -53,13 +53,13 @@ Note: If other Azure users need to interact with this AI Project please see the 
 
   
 
-Figure 0‑5
+![Figure 0‑5](images/0-5.png)
 
 On the “Encryption” tab, leave the check box unchecked and click “Next”
 
   
 
-Figure 0‑6
+![Figure 0‑6](images/0-6.png)
 
 On the “Tags” tab, click “Review and Create”
 
@@ -67,19 +67,19 @@ Azure will begin deploying you Azure AI Foundry project. Please note this may ta
 
   
 
-Figure 0‑7
+![Figure 0‑7](images/0-7.png)
 
 Once the deployment is complete click “Go to resource”
 
   
 
-Figure 0‑8
+![Figure 0‑8](images/0-8.png)
 
 On the resource page, click on “Go to Azure AI Foundry portal”.
 
   
 
-Figure 0‑9
+![Figure 0‑9](images/0-9.png)
 
 You will copy two URLs needed for setting up your Custom Connector.
 
@@ -87,13 +87,13 @@ From the “Overview” tab, on the sub-section “Azure AI Services”, copy th
 
   
 
-Figure 0‑10
+![Figure 0‑10](images/0-10.png)
 
 From the “Overview” tab, on the sub-section “Azure AI Foundry”, copy the path from the text box “Azure AI Foundry project endpoint” starting with “/api/projects/” . This will be used for the “Base URL” in your custom connector.
 
   
 
-Figure 0‑11
+![Figure 0‑11](images/0-11.png)
 
 You have successfully configured your Azure AI Foundry project for the Evaluation service!
 
@@ -107,7 +107,7 @@ Open a new tab and navigate to “portal.azure.com”. From the search bar, sear
 
   
 
-Figure 0‑12
+![Figure 0‑12](images/0-12.png)
 
 Enter a name into the “Name” text box such as “CPS Eval Service App Reg” and click “Register”.
 
@@ -117,13 +117,13 @@ To add “user\_impersonation” permissions for “Azure Machine Learning Servi
 
   
 
-Figure 0‑13
+![Figure 0‑13](images/0-13.png)
 
 Click on “user\_impersonation” and click on “Add permissions”
 
   
 
-Figure 0‑14
+![Figure 0‑14](images/0-14.png)
 
 Perform similar steps for “Azure Service Management” however you’ll find “Azure Service Management under the “Microsoft APIs”.
 
@@ -132,31 +132,31 @@ user.read . Select “User.Read as shown below. Then click “Update permissions
 
   
 
-Figure 0‑15
+![Figure 0‑15](images/0-15.png)
 
 Your resulting permissions should look like so:
 
   
 
-Figure 0‑16
+![Figure 0‑16](images/0-16.png)
 
 Next add a “Client Secret”. Click on “Certificates & secrets”. Click “+ New client secret”. Enter in a description and press “Add”.
 
   
 
-Figure 0‑17
+![Figure 0‑17](images/0-17.png)
 
 Copy the “Value” (not the “Secret ID”) to a notepad. Do NOT copy or use the “Secret ID”.
 
   
 
-Figure 0‑18
+![Figure 0‑18](images/0-18.png)
 
 Click on “Overview” and copy the “Application (client) ID to a notepad.
 
   
 
-Figure 0‑19
+![Figure 0‑19](images/0-19.png)
 
 Keep this tab open and open a new tab for the next section.
 
@@ -170,7 +170,7 @@ Click on “Custom Connectors”, then for the “CPS Azure Evaluation Service�
 
   
 
-Figure 0‑20
+![Figure 0‑20](images/0-20.png)
 
 Update the values for “Host” and for “Base URL” using the values from the section [Create Azure AI Foundry Evaluation Service](https://microsoft.sharepoint.com/teams/CopilotStudioCollaborations-ObservabilityServicewithCopilotStudioagents/Shared%20Documents/GitHub%20Repo%20Post.docx#_Create_Azure_AI).
 
@@ -186,7 +186,7 @@ Click “Security” from the bottom-right corner to proceed.
 
   
 
-Figure 0‑21
+![Figure 0‑21](images/0-21.png)
 
 Select “OAuth 2.0” from the “Authentication type” drop-down.
 
@@ -196,23 +196,19 @@ Update the “Authorization URL”, “Resource URL” and “Scope” as shown 
 
 Click the copy icon for the “Redirect URL” as you will need it to update the Service Principal
 
-  
-
-![](file:///C:/Users/VALTER~1/AppData/Local/Temp/msohtmlclip1/01/clip_image041.png)![](file:///C:/Users/VALTER~1/AppData/Local/Temp/msohtmlclip1/01/clip_image042.png)![](file:///C:/Users/VALTER~1/AppData/Local/Temp/msohtmlclip1/01/clip_image043.png)![](file:///C:/Users/VALTER~1/AppData/Local/Temp/msohtmlclip1/01/clip_image044.png)
-
-Figure 0‑22
+![Figure 0‑22](images/0-22.png)
 
 Navigate back to the tab where you have the Service Principal (App Registration) open. Click on “Authentication”, “+Add a platform” and then “Web”.
 
   
 
-Figure 0‑23
+![Figure 0‑23](images/0-23.png)
 
 From the “Redirect URI” on the custom connector, paste the value into the “Redirect URIs” and click “Configure”.
 
   
 
-Figure 0‑24
+![Figure 0‑24](images/0-24.png)
 
 Close the tab for the App Registration, you are finished configure the Service Principal!
 
@@ -220,7 +216,7 @@ Back on the tab with the custom connector, click on “Update connector” and t
 
   
 
-Figure 0‑25
+![Figure 0‑25](images/0-25.png)
 
 You are finished configuring the custom connector!
 
