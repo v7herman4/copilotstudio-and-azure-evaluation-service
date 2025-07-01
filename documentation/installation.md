@@ -20,6 +20,6 @@ Navigate to portal.azure.com
 
 Search for “azure ai foundry” in the search box and click on it from the results.
 
-Figure 0‑1
+[Figure 0‑1](../images/0-1.png)
 
 Click on “Create Resource”
