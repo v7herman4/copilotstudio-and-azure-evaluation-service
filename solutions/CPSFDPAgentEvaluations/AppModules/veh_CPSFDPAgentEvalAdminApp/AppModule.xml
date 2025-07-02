@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppModule>
+  <UniqueName>veh_CPSFDPAgentEvalAdminApp</UniqueName>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <WebResourceId>953b9fac-1e5e-e611-80d6-00155ded156f</WebResourceId>
+  <OptimizedFor></OptimizedFor>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <FormFactor>1</FormFactor>
+  <ClientType>4</ClientType>
+  <NavigationType>0</NavigationType>
+  <AppModuleComponents>
+    <AppModuleComponent type="1" schemaName="conversationtranscript" />
+    <AppModuleComponent type="1" schemaName="veh_conversationpromptevaluation" />
+    <AppModuleComponent type="60" id="{e4bc90c2-cd74-4443-97f4-0ac3f0667b22}" />
+    <AppModuleComponent type="60" id="{530f9b1c-f246-f011-877a-7c1e520c84d8}" />
+    <AppModuleComponent type="60" id="{e5c9e797-0b43-f011-b4cb-7c1e520c84d8}" />
+    <AppModuleComponent type="60" id="{0c9ea55f-78f9-4dba-a78b-ce1243304cde}" />
+    <AppModuleComponent type="62" schemaName="veh_CPSFDPAgentEvalAdminApp" />
+  </AppModuleComponents>
+  <AppModuleRoleMaps>
+    <Role id="{627090ff-40a3-4053-8790-584edc5be201}" />
+    <Role id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+  </AppModuleRoleMaps>
+  <LocalizedNames>
+    <LocalizedName description="CPS FDP Agent Eval Admin App" languagecode="1033" />
+  </LocalizedNames>
+  <appsettings>
+    <appsetting settingdefinitionid.uniquename="AppChannel">
+      <iscustomizable>1</iscustomizable>
+      <value>1</value>
+    </appsetting>
+  </appsettings>
+</AppModule>
