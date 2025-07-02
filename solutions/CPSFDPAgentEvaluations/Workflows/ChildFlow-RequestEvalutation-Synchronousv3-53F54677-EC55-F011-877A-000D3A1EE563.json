@@ -1,0 +1,864 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_veh-5fcps-20azure-20evaluation-20service-5f34d393299b714193": {
+        "api": {
+          "name": "shared_veh-5fcps-20azure-20evaluation-20service-5f34d393299b714193",
+          "logicalName": "veh_5Fcps-20azure-20evaluation-20service"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedveh5fcps20azure20evaluation20service5f34d393299b714193_3f3c1"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_commondataserviceforapps-1": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "veh_sharedcommondataserviceforapps_00757"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "d26335ab-aedb-4096-b61e-1d5aed063b97"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "title": "ThreadId",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "conversationtranscript.conversationtranscriptid",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_1": {
+                  "title": "RunId",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "json.id\n",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "text_2": {
+                  "title": "QueryJSON",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "varQueryJson",
+                  "x-ms-content-hint": "TEXT"
+                },
+                "number": {
+                  "description": "The count of this Activity from Apply to Each",
+                  "title": "ActivityCount",
+                  "type": "number",
+                  "x-ms-content-hint": "NUMBER",
+                  "x-ms-dynamically-added": true
+                },
+                "text_3": {
+                  "description": "varResponseJSON",
+                  "title": "ResponseJSON",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                },
+                "text_4": {
+                  "title": "PromptOnlyJSON",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "varThisPromptOnlyJSON",
+                  "x-ms-content-hint": "TEXT"
+                }
+              },
+              "required": [
+                "text",
+                "text_1",
+                "text_2",
+                "number",
+                "text_3",
+                "text_4"
+              ]
+            }
+          }
+        }
+      },
+      "actions": {
+        "ComposeQueryJSON": {
+          "runAfter": {
+            "Compose_varThisPromptOnlyJSON": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "d2ec11f4-055c-4825-a759-96f27b81e10c"
+          },
+          "type": "Compose",
+          "inputs": "@concat('[',substring(replace(triggerBody()['text_2'], variables('varSingleQuoteReplace'),'\\'''),2),']')"
+        },
+        "Respond_to_a_Power_App_or_flow": {
+          "runAfter": {
+            "Add_ConversationPrompEvaluation": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "e999fb66-a1d0-40e9-83ca-5c618658feeb"
+          },
+          "type": "Response",
+          "kind": "PowerApp",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "title": "Success",
+                  "x-ms-dynamically-added": true,
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": {}
+            },
+            "statusCode": 200,
+            "body": {
+              "success": "@true"
+            }
+          }
+        },
+        "Initialize_varCheckForResponseCounter": {
+          "runAfter": {
+            "Initialize_varResponseArray": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "55ac96e9-5c75-4dbb-a65e-55c98267f492"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varCheckForResponseCounter",
+                "type": "integer",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "Do_until_varCheckForResponseCounter_gt_15_and_no_more_than_45_seconds": {
+          "actions": {
+            "Compose-EvaluatonStatus": {
+              "runAfter": {
+                "Get_Evaluation_Result": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "4e162fea-a2cb-473e-9963-1f5f9705b343"
+              },
+              "type": "Compose",
+              "inputs": "@outputs('Get_Evaluation_Result')?['body/status']"
+            },
+            "Condition": {
+              "actions": {
+                "Set_varCheckForResponseCounter_eq_20_to_quit_Do_Until": {
+                  "metadata": {
+                    "operationMetadataId": "be5cbe55-2675-46ae-9980-4c6fd80b3e23"
+                  },
+                  "type": "SetVariable",
+                  "inputs": {
+                    "name": "varCheckForResponseCounter",
+                    "value": 20
+                  }
+                }
+              },
+              "runAfter": {
+                "Compose-EvaluatonStatus": [
+                  "Succeeded"
+                ]
+              },
+              "else": {
+                "actions": {
+                  "Increment_varCheckForResponseCounter_plus_1": {
+                    "metadata": {
+                      "operationMetadataId": "6b0aff95-c4cb-44a2-93fc-d318c9acfafc"
+                    },
+                    "type": "IncrementVariable",
+                    "inputs": {
+                      "name": "varCheckForResponseCounter",
+                      "value": 1
+                    }
+                  },
+                  "Delay_3_sec": {
+                    "runAfter": {
+                      "Increment_varCheckForResponseCounter_plus_1": [
+                        "Succeeded"
+                      ]
+                    },
+                    "metadata": {
+                      "operationMetadataId": "63ee0df3-f98e-4517-92c0-bdecbc784514"
+                    },
+                    "type": "Wait",
+                    "inputs": {
+                      "interval": {
+                        "count": 3,
+                        "unit": "Second"
+                      }
+                    }
+                  }
+                }
+              },
+              "expression": {
+                "and": [
+                  {
+                    "equals": [
+                      "@outputs('Get_Evaluation_Result')?['body/status']",
+                      "Completed"
+                    ]
+                  }
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "065f64ec-8551-44bc-b4b8-6f80dd5d5d94"
+              },
+              "type": "If"
+            },
+            "Get_Evaluation_Result": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "completionId": "@outputs('Submit_Evaluation_Request')?['body/id']",
+                  "api-version": "2025-05-15-preview"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_veh-5fcps-20azure-20evaluation-20service-5f34d393299b714193",
+                  "operationId": "getAgentEvaluationFdp",
+                  "connectionName": "shared_veh-5fcps-20azure-20evaluation-20service-5f34d393299b714193"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Submit_Evaluation_Request": [
+              "Succeeded"
+            ]
+          },
+          "expression": "@greater(variables('varCheckForResponseCounter'), 15)",
+          "limit": {
+            "count": 60,
+            "timeout": "PT1H"
+          },
+          "metadata": {
+            "operationMetadataId": "eafa1d54-06e6-4273-ab84-bbcc6f3b3f33"
+          },
+          "type": "Until"
+        },
+        "Initialize_varQueryArray": {
+          "runAfter": {
+            "Set_variable_Good": [
+              "Succeeded",
+              "Failed",
+              "Skipped",
+              "TimedOut"
+            ],
+            "Set_variable_bad": [
+              "Succeeded",
+              "Skipped"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "9937cfb3-ccec-445b-8ae7-ef51b135b120"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varQueryArray",
+                "type": "array",
+                "value": "@json(replace(outputs('ComposeQueryJSON'),variables('varSingleQuoteReplace'),'\\'''))"
+              }
+            ]
+          }
+        },
+        "Initialize_variable_varTempObj": {
+          "runAfter": {
+            "Do_until_varCheckForResponseCounter_gt_15_and_no_more_than_45_seconds": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "af1582dd-4c45-4ad6-b98b-f6f4622a44f7"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varTempObj",
+                "type": "object",
+                "value": {}
+              }
+            ]
+          }
+        },
+        "Initialize_variable_varEvalObj": {
+          "runAfter": {
+            "Initialize_variable_varTempObj": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "a895758f-a9c7-4549-8c58-8308ce927770"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varEvalObj",
+                "type": "object",
+                "value": {}
+              }
+            ]
+          }
+        },
+        "Initialize_variable_varCurrEval": {
+          "runAfter": {
+            "Initialize_variable_varEvalObj": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "a1001a27-bb32-4701-a50e-1d311b4d2a7c"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varCurrEval",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "For_each_Evaluator": {
+          "foreach": "@outputs('Get_Evaluation_Result')?['body/result']",
+          "actions": {
+            "Set_variable_varEvalObj": {
+              "runAfter": {
+                "Switch_Evaluator_name": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "7dc33d16-3c0f-417e-89cf-608c87d701d0"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "varEvalObj",
+                "value": "@addProperty(\r\naddProperty(\r\naddProperty(variables('varTempObj'),concat(variables('varCurrEval'),' Score'),items('For_each_Evaluator')?['score']),\r\nconcat(variables('varCurrEval'),' Status'),items('For_each_Evaluator')?['status']),\r\nconcat(variables('varCurrEval'),' Reason'),items('For_each_Evaluator')?['reason'])"
+              }
+            },
+            "Set_varTempObj_eq_varEvalObj": {
+              "metadata": {
+                "operationMetadataId": "36f31b95-1666-4799-8e10-9853116194df"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "varTempObj",
+                "value": "@variables('varEvalObj')"
+              }
+            },
+            "Switch_Evaluator_name": {
+              "runAfter": {
+                "Set_varTempObj_eq_varEvalObj": [
+                  "Succeeded"
+                ]
+              },
+              "cases": {
+                "Case_Code_Vulnerability_Evaluator": {
+                  "case": "Code Vulnerability Evaluator",
+                  "actions": {
+                    "Set_variable_varCurrEval": {
+                      "metadata": {
+                        "operationMetadataId": "5d2a1321-d946-480d-9d25-bc4eeca2ca97"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varCurrEval",
+                        "value": "Code Vulnerability Evaluator"
+                      }
+                    }
+                  }
+                },
+                "Case_Violence": {
+                  "case": "Violence",
+                  "actions": {
+                    "Set_varCurrEval_Violence": {
+                      "metadata": {
+                        "operationMetadataId": "2ba2b709-aff0-40fd-971c-9be9a4b1004d"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varCurrEval",
+                        "value": "Violence"
+                      }
+                    }
+                  }
+                },
+                "Case_Fluency": {
+                  "case": "Fluency",
+                  "actions": {
+                    "Set_variable_Fluency": {
+                      "metadata": {
+                        "operationMetadataId": "7e4ab96b-93ff-48c8-951a-d893bd22077d"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varCurrEval",
+                        "value": "Fluency"
+                      }
+                    }
+                  }
+                },
+                "Case_Coherence": {
+                  "case": "Coherence",
+                  "actions": {
+                    "Set_Coherence": {
+                      "metadata": {
+                        "operationMetadataId": "23dd2b45-ee52-4f80-a33d-5c4271bc5d3e"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varCurrEval",
+                        "value": "Coherence"
+                      }
+                    }
+                  }
+                },
+                "Case_HateUnfairness": {
+                  "case": "HateUnfairness",
+                  "actions": {
+                    "Set_Hate_Unfairness": {
+                      "metadata": {
+                        "operationMetadataId": "6d506de2-6c57-400f-8e44-130b0849433d"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varCurrEval",
+                        "value": "HateUnfairness"
+                      }
+                    }
+                  }
+                },
+                "Case_IndirectAttack": {
+                  "case": "IndirectAttack",
+                  "actions": {
+                    "Set_IndirectAttack": {
+                      "metadata": {
+                        "operationMetadataId": "4e77a3fd-3c72-4897-b79a-12cd36b889ef"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varCurrEval",
+                        "value": "IndirectAttack"
+                      }
+                    }
+                  }
+                },
+                "Case_Intent_Resolution_Evaluator": {
+                  "case": "Intent Resolution Evaluator",
+                  "actions": {
+                    "Set_Intent_Resolution_Evaluator": {
+                      "metadata": {
+                        "operationMetadataId": "6525a98e-bdc9-438e-b225-12932433c912"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varCurrEval",
+                        "value": "Intent Resolution Evaluator"
+                      }
+                    }
+                  }
+                },
+                "Case_Relevance": {
+                  "case": "Relevance",
+                  "actions": {
+                    "Set_Relevance": {
+                      "metadata": {
+                        "operationMetadataId": "8ac03685-71e7-478c-9427-9c16aff54dc1"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varCurrEval",
+                        "value": "Relevance"
+                      }
+                    }
+                  }
+                },
+                "Case_SelfHarm": {
+                  "case": "SelfHarm",
+                  "actions": {
+                    "Set_SelfHarm": {
+                      "metadata": {
+                        "operationMetadataId": "80fba949-01d6-4b41-a43f-55142387adfe"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varCurrEval",
+                        "value": "SelfHarm"
+                      }
+                    }
+                  }
+                },
+                "Case_Sexual": {
+                  "case": "Sexual",
+                  "actions": {
+                    "Set_Sexual": {
+                      "metadata": {
+                        "operationMetadataId": "0b8a1dab-768d-43b4-adea-8d103b8e188d"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varCurrEval",
+                        "value": "Sexual"
+                      }
+                    }
+                  }
+                },
+                "Case_TaskAdherence": {
+                  "case": "TaskAdherence",
+                  "actions": {
+                    "Set_TaskAdherence": {
+                      "metadata": {
+                        "operationMetadataId": "732d3094-f027-4216-a166-73eae82f167c"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varCurrEval",
+                        "value": "TaskAdherence"
+                      }
+                    }
+                  }
+                },
+                "Case_Tool_Call_Accuracy": {
+                  "case": "Tool Call Accuracy",
+                  "actions": {
+                    "Set_Tool_Call_Accuracy": {
+                      "metadata": {
+                        "operationMetadataId": "f44ee4cb-f4e0-4f13-9ab9-ba6233becb3a"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "varCurrEval",
+                        "value": "Tool Call Accuracy"
+                      }
+                    }
+                  }
+                }
+              },
+              "default": {
+                "actions": {
+                  "Set_variable": {
+                    "metadata": {
+                      "operationMetadataId": "1849e469-f052-407e-8b5f-c96acdb59533"
+                    },
+                    "type": "SetVariable",
+                    "inputs": {
+                      "name": "varCurrEval",
+                      "value": "@{string(rand(1000,9999))}"
+                    }
+                  }
+                }
+              },
+              "expression": "@item()?['evaluator']",
+              "metadata": {
+                "operationMetadataId": "ed7bdc19-39e5-43d9-9e38-7da723811bc5"
+              },
+              "type": "Switch"
+            }
+          },
+          "runAfter": {
+            "Initialize_variable_varCurrEval": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "d73508d6-0355-4802-b8d6-8e75091f9cde"
+          },
+          "type": "Foreach",
+          "runtimeConfiguration": {
+            "concurrency": {
+              "repetitions": 1
+            }
+          }
+        },
+        "Add_ConversationPrompEvaluation": {
+          "runAfter": {
+            "For_each_Evaluator": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "fa3adecf-dd9c-4f9d-bb84-cb49bc4927f0"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "entityName": "veh_conversationpromptevaluations",
+              "item/veh_ConversationTranscript@odata.bind": "/conversationtranscripts(@{triggerBody()?['text']})",
+              "item/veh_runid": "@triggerBody()?['text_1']",
+              "item/veh_codevulnerabilityscore": "@variables('varEvalObj')?['Code Vulnerability Evaluator Score']",
+              "item/veh_codevulnerabilityevalstatus": "@variables('varEvalObj')?['Code Vulnerability Evaluator Status']",
+              "item/veh_codevulnerabilityreason": "@variables('varEvalObj')?['Code Vulnerability Evaluator Reason']",
+              "item/veh_coherencescore": "@variables('varEvalObj')?['Coherence Score']",
+              "item/veh_coherenceevalstatus": "@variables('varEvalObj')?['Coherence Status']",
+              "item/veh_coherencereason": "@variables('varEvalObj')?['Coherence Reason']",
+              "item/veh_fluencyscore": "@variables('varEvalObj')?['Fluency Score']",
+              "item/veh_fluencyevalstatus": "@variables('varEvalObj')?['Fluency Status']",
+              "item/veh_fluencyreason": "@variables('varEvalObj')?['Fluency Reason']",
+              "item/veh_hateunfairnessscore": "@variables('varEvalObj')?['HateUnfairness Score']",
+              "item/veh_hateunfairnessevalstatus": "@variables('varEvalObj')?['HateUnfairness Status']",
+              "item/veh_hateunfairnessreason": "@variables('varEvalObj')?['HateUnfairness Reason']",
+              "item/veh_indirectattackscore": "@variables('varEvalObj')?['IndirectAttack Score']",
+              "item/veh_indirectattackevalstatus": "@variables('varEvalObj')?['IndirectAttack Status']",
+              "item/veh_indirectattackreason": "@variables('varEvalObj')?['IndirectAttack Reason']",
+              "item/veh_intentresolutionscore": "@variables('varEvalObj')?['Intent Resolution Evaluator Score']",
+              "item/veh_intentresolutionevalstatus": "@variables('varEvalObj')?['Intent Resolution Evaluator Status']",
+              "item/veh_intentresolutionreason": "@variables('varEvalObj')?['Intent Resolution Evaluator Reason']",
+              "item/veh_promptresponse": "@{outputs('Compose_varThisPromptOnlyJSON')}@{outputs('ComposeResponseJSON')}",
+              "item/veh_relevancescore": "@variables('varEvalObj')?['Relevance Score']",
+              "item/veh_relevanceevalstatus": "@variables('varEvalObj')?['Relevance Status']",
+              "item/veh_relevancereason": "@variables('varEvalObj')?['Relevance Reason']",
+              "item/veh_runcontent": "@{outputs('ComposeQueryJSON')}@{string(variables('varTryCatchResponseJSON'))}\n",
+              "item/veh_runindex": "@triggerBody()['number']",
+              "item/veh_selfharmscore": "@variables('varEvalObj')?['SelfHarm Score']",
+              "item/veh_selfharmevalstatus": "@variables('varEvalObj')?['SelfHarm Status']",
+              "item/veh_selfharmreason": "@variables('varEvalObj')?['SelfHarm Reason']",
+              "item/veh_sexualscore": "@variables('varEvalObj')?['Sexual Score']",
+              "item/veh_sexualevalstatus": "@variables('varEvalObj')?['Sexual Status']",
+              "item/veh_sexualreason": "@variables('varEvalObj')?['Sexual Reason']",
+              "item/veh_taskadherencescore": "@variables('varEvalObj')?['TaskAdherence Score']",
+              "item/veh_taskadherenceevalstatus": "@variables('varEvalObj')?['TaskAdherence Status']",
+              "item/veh_taskadherencereason": "@variables('varEvalObj')?['TaskAdherence Reason']",
+              "item/veh_toolcallaccuracyscore": "@variables('varEvalObj')?['TaskAdherence Score']",
+              "item/veh_toolcallaccuracyevalstatus": "@variables('varEvalObj')?['Tool Call Accuracy Status']",
+              "item/veh_toolcallaccuracyreason": "@variables('varEvalObj')?['Tool Call Accuracy Reason']",
+              "item/veh_violencescore": "@variables('varEvalObj')?['Violence Score']",
+              "item/veh_violenceevalstatus": "@variables('varEvalObj')?['Violence Status']",
+              "item/veh_violencereason": "@variables('varEvalObj')?['Violence Reason']"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "CreateRecord",
+              "connectionName": "shared_commondataserviceforapps-1"
+            }
+          }
+        },
+        "Initialize_varResponseArray": {
+          "runAfter": {
+            "Initialize_varQueryArray": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "a0d818f1-7243-41a0-82b1-158d7ccf9cf9"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varResponseArray",
+                "type": "array",
+                "value": "@variables('varTryCatchResponseJSON')"
+              }
+            ]
+          }
+        },
+        "ComposeResponseJSON": {
+          "runAfter": {
+            "ComposeQueryJSON": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "e43fc33d-e7a3-4393-b38f-47fd434add0d"
+          },
+          "type": "Compose",
+          "inputs": "@json(concat('[',substring(replace(triggerBody()['text_3'], variables('varSingleQuoteReplace'),'\\'''),2),']'))"
+        },
+        "Initialize_variable_varTryCatchResponseJSON": {
+          "runAfter": {
+            "Init_varSingleQuoteReplace": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "af252e74-0edf-40c1-b593-b0189347bb79"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varTryCatchResponseJSON",
+                "type": "array"
+              }
+            ]
+          }
+        },
+        "Set_variable_Good": {
+          "runAfter": {
+            "ComposeResponseJSON": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "dc66f37d-439a-4d8c-a22d-606e362420f0"
+          },
+          "type": "SetVariable",
+          "inputs": {
+            "name": "varTryCatchResponseJSON",
+            "value": "@outputs('ComposeResponseJSON')"
+          }
+        },
+        "Set_variable_bad": {
+          "runAfter": {
+            "Compose_tempJSONstring": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "95a4776b-6583-4c3b-94b4-5f181c111054"
+          },
+          "type": "SetVariable",
+          "inputs": {
+            "name": "varTryCatchResponseJSON",
+            "value": "@json(outputs('Compose_tempJSONString'))"
+          }
+        },
+        "Compose_tempJSONstring": {
+          "runAfter": {
+            "ComposeResponseJSON": [
+              "Failed"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "b41fea01-9beb-44b3-8f0e-39f91f216cb9"
+          },
+          "type": "Compose",
+          "inputs": "[{\n      'role': 'user',\n      'content': [\n        {\n          'type': 'text',\n          'text': 'Error in ComposeResponseJSON'\n        }\n      ]\n    }]"
+        },
+        "Compose_varThisPromptOnlyJSON": {
+          "runAfter": {
+            "Initialize_variable_varTryCatchResponseJSON": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "2491ac0c-233a-4051-abb5-77485574f97d"
+          },
+          "type": "Compose",
+          "inputs": "@concat('[',substring(replace(triggerBody()['text_4'], variables('varSingleQuoteReplace'),'\\'''),2),']')"
+        },
+        "Init_varSingleQuoteReplace": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "ba74075c-f181-4010-8d0f-bc0891f1c86a"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varSingleQuoteReplace",
+                "type": "string",
+                "value": "***/\\/\\/\\***"
+              }
+            ]
+          },
+          "description": "Used to replace single quotes inside actual text with non-system delimiter so converting to JSON will work. Will escape the single-quote "
+        },
+        "Submit_Evaluation_Request": {
+          "runAfter": {
+            "Initialize_varCheckForResponseCounter": [
+              "Succeeded"
+            ]
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "api-version": "2025-05-15-preview",
+              "evaluationRequest/RunId": "@triggerBody()?['text_1']",
+              "evaluationRequest/ThreadId": "@triggerBody()?['text']",
+              "evaluationRequest/Evaluators": {
+                "Code Vulnerability Evaluator": {
+                  "Id": "azureai://built-in/evaluators/code_vulnerability"
+                },
+                "Coherence": {
+                  "Id": "azureai://built-in/evaluators/coherence"
+                },
+                "Fluency": {
+                  "Id": "azureai://built-in/evaluators/fluency"
+                },
+                "HateUnfairness": {
+                  "Id": "azureai://built-in/evaluators/hate_unfairness"
+                },
+                "IndirectAttack": {
+                  "Id": "azureai://built-in/evaluators/indirect_attack"
+                },
+                "Intent Resolution Evaluator": {
+                  "Id": "azureai://built-in/evaluators/intent_resolution"
+                },
+                "Relevance": {
+                  "Id": "azureai://built-in/evaluators/relevance"
+                },
+                "SelfHarm": {
+                  "Id": "azureai://built-in/evaluators/self_harm"
+                },
+                "Sexual": {
+                  "Id": "azureai://built-in/evaluators/sexual"
+                },
+                "TaskAdherence": {
+                  "Id": "azureai://built-in/evaluators/task_adherence"
+                },
+                "Tool Call Accuracy": {
+                  "Id": "azureai://built-in/evaluators/tool_call_accuracy"
+                },
+                "Violence": {
+                  "Id": "azureai://built-in/evaluators/violence"
+                }
+              },
+              "evaluationRequest/Query": "@variables('varQueryArray')",
+              "evaluationRequest/Response": "@variables('varResponseArray')",
+              "evaluationRequest/ToolDefinitions": [],
+              "evaluationRequest/SamplingConfiguration/SamplingPercent": 100,
+              "evaluationRequest/RedactionConfiguration/RedactScoreProperties": false,
+              "evaluationRequest/AppInsightsConnectionString": "InstrumentationKey=e5f61295-c763-4cfd-ab4e-45cddd5211cf;IngestionEndpoint=https://eastus2-3.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus2.livediagnostics.monitor.azure.com/;ApplicationId=cfce9ec1-2c60-4b88-8b40-f3341502bfe6"
+            },
+            "host": {
+              "apiId": "",
+              "operationId": "submitAgentEvaluationFdp",
+              "connectionName": "shared_veh-5fcps-20azure-20evaluation-20service-5f34d393299b714193"
+            }
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

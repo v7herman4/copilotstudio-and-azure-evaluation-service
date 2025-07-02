@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportExportXml version="9.2.25054.214" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.25054.214" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.25054.00214">
+  <SolutionManifest>
+    <UniqueName>CPSFDPAgentEvaluations</UniqueName>
+    <LocalizedNames>
+      <LocalizedName description="CPS Azure Agent Evaluation Service" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions />
+    <Version>1.0.1.1</Version>
+    <Managed>0</Managed>
+    <Publisher>
+      <UniqueName>valterherman</UniqueName>
+      <LocalizedNames>
+        <LocalizedName description="Valter Herman" languagecode="1033" />
+      </LocalizedNames>
+      <Descriptions />
+      <EMailAddress xsi:nil="true"></EMailAddress>
+      <SupportingWebsiteUrl xsi:nil="true"></SupportingWebsiteUrl>
+      <CustomizationPrefix>veh</CustomizationPrefix>
+      <CustomizationOptionValuePrefix>94857</CustomizationOptionValuePrefix>
+      <Addresses>
+        <Address>
+          <AddressNumber>1</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+        <Address>
+          <AddressNumber>2</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+      </Addresses>
+    </Publisher>
+    <RootComponents>
+      <RootComponent type="1" schemaName="conversationtranscript" behavior="1" />
+      <RootComponent type="1" schemaName="veh_conversationpromptevaluation" behavior="0" />
+      <RootComponent type="20" id="{3532c9f4-a356-f011-877a-000d3a1ee563}" behavior="0" />
+      <RootComponent type="29" id="{53f54677-ec55-f011-877a-000d3a1ee563}" behavior="0" />
+      <RootComponent type="29" id="{fcd33c5e-ea3b-f011-b4cc-7c1e520c84d8}" behavior="0" />
+      <RootComponent type="300" schemaName="veh_promptresponseapppbi_fcf37" behavior="0" />
+      <RootComponent type="372" id="{ba458d18-3cc7-4ff9-8608-60a92d91e16c}" schemaName="veh_5Fcps-20azure-20evaluation-20service" behavior="0" />
+      <RootComponent type="401" id="{18b01d14-1b4b-41e1-9927-a7366c4b1599}" behavior="0" />
+      <RootComponent type="401" id="{86ffd107-d265-4b67-8684-506fe5477b7b}" behavior="0" />
+      <RootComponent type="401" id="{d5348810-df80-4488-89d0-7d59b2b9af26}" behavior="0" />
+      <RootComponent type="62" schemaName="veh_CPSFDPAgentEvalAdminApp" behavior="0" />
+      <RootComponent type="80" schemaName="veh_CPSFDPAgentEvalAdminApp" behavior="0" />
+    </RootComponents>
+    <MissingDependencies>
+      <MissingDependency>
+        <Required type="1" schemaName="conversationtranscript" displayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="1" schemaName="conversationtranscript" displayName="ConversationTranscript" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="conversationtranscript" displayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="2" schemaName="veh_formattedconversation" displayName="Formatted Conversation" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="conversationtranscript" displayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="2" schemaName="veh_title" displayName="Title" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="conversationtranscript" displayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="26" schemaName="Conversation Transcripts" displayName="Conversation Transcripts" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" id="{bde504f5-f346-f011-877a-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="conversationtranscript" displayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="29" displayName="Analyze CPS Agent Convo on Convo Trx Create" id="{fcd33c5e-ea3b-f011-b4cc-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="conversationtranscript" displayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="300" schemaName="veh_promptresponseapppbi_fcf37" displayName="Prompt Response App PBI" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="conversationtranscript" displayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="60" displayName="ConvTranscriptMainForm" parentDisplayName="ConversationTranscript" id="{530f9b1c-f246-f011-877a-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="conversationtranscript" displayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="60" displayName="Convo Content Quickview" parentDisplayName="ConversationTranscript" id="{e5c9e797-0b43-f011-b4cb-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="conversationtranscript" displayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="62" schemaName="veh_CPSFDPAgentEvalAdminApp" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="conversationtranscript" displayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="80" schemaName="veh_CPSFDPAgentEvalAdminApp" displayName="CPS FDP Agent Eval Admin App" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="msdyn_aimodel" displayName="AI Model" solution="msdyn_AISolution (202505.3.27.2)">
+          <package appName="PowerAI" version="202505.3.27.2">msdyn_AISolutionAnchor (202505.3.27.2)</package>
+        </Required>
+        <Dependent type="300" schemaName="veh_promptresponseapppbi_fcf37" displayName="Prompt Response App PBI" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="content" displayName="Content" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="26" schemaName="Conversation Transcripts" displayName="Conversation Transcripts" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" id="{bde504f5-f346-f011-877a-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="content" displayName="Content" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="60" displayName="ConvTranscriptMainForm" parentDisplayName="ConversationTranscript" id="{530f9b1c-f246-f011-877a-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="content" displayName="Content" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="60" displayName="Convo Content Quickview" parentDisplayName="ConversationTranscript" id="{e5c9e797-0b43-f011-b4cb-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="conversationstarttime" displayName="ConversationStartTime" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="26" schemaName="Conversation Transcripts" displayName="Conversation Transcripts" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" id="{bde504f5-f346-f011-877a-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="conversationstarttime" displayName="ConversationStartTime" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="60" displayName="ConvTranscriptMainForm" parentDisplayName="ConversationTranscript" id="{530f9b1c-f246-f011-877a-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="conversationstarttime" displayName="ConversationStartTime" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="60" displayName="Convo Content Quickview" parentDisplayName="ConversationTranscript" id="{e5c9e797-0b43-f011-b4cb-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="conversationtranscriptid" displayName="conversationtranscript" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="26" schemaName="Conversation Transcripts" displayName="Conversation Transcripts" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" id="{bde504f5-f346-f011-877a-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="createdon" displayName="Created On" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="26" schemaName="Conversation Transcripts" displayName="Conversation Transcripts" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" id="{bde504f5-f346-f011-877a-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="metadata" displayName="Metadata" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="60" displayName="ConvTranscriptMainForm" parentDisplayName="ConversationTranscript" id="{530f9b1c-f246-f011-877a-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="name" displayName="Name" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="10" schemaName="veh_conversationpromptevaluation_ConversationTranscript_conversationtranscript" displayName="veh_conversationpromptevaluation_ConversationTranscript_conversationtranscript" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="name" displayName="Name" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="26" schemaName="Conversation Transcripts" displayName="Conversation Transcripts" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" id="{bde504f5-f346-f011-877a-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="name" displayName="Name" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="60" displayName="ConvTranscriptMainForm" parentDisplayName="ConversationTranscript" id="{530f9b1c-f246-f011-877a-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="ownerid" displayName="Owner" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="Active" />
+        <Dependent type="60" displayName="ConvTranscriptMainForm" parentDisplayName="ConversationTranscript" id="{530f9b1c-f246-f011-877a-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="ownerid" displayName="Owner" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="Active" />
+        <Dependent type="60" displayName="Convo Content Quickview" parentDisplayName="ConversationTranscript" id="{e5c9e797-0b43-f011-b4cb-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="schematype" displayName="SchemaType" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="60" displayName="ConvTranscriptMainForm" parentDisplayName="ConversationTranscript" id="{530f9b1c-f246-f011-877a-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="schemaversion" displayName="ContentSchemaVersion" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="60" displayName="ConvTranscriptMainForm" parentDisplayName="ConversationTranscript" id="{530f9b1c-f246-f011-877a-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="statecode" displayName="Status" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="26" schemaName="Conversation Transcripts" displayName="Conversation Transcripts" parentSchemaName="conversationtranscript" parentDisplayName="ConversationTranscript" id="{bde504f5-f346-f011-877a-7c1e520c84d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="60" displayName="Information" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)" id="{0c9ea55f-78f9-4dba-a78b-ce1243304cde}">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="80" schemaName="veh_CPSFDPAgentEvalAdminApp" displayName="CPS FDP Agent Eval Admin App" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="60" displayName="Information" parentDisplayName="ConversationTranscript" solution="PowerVirtualAgentsCommon (2025.5.2.17389803)" id="{e4bc90c2-cd74-4443-97f4-0ac3f0667b22}">
+          <package appName="CCI Bots" version="2025.5.2.17389803">msdynce_CustomerCareIntelligenceBots_Anchor (2025.5.2.17389803)</package>
+        </Required>
+        <Dependent type="80" schemaName="veh_CPSFDPAgentEvalAdminApp" displayName="CPS FDP Agent Eval Admin App" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="61" schemaName="msdyn_/Images/AppModule_Default_Icon.png" displayName="msdyn_/Images/AppModule_Default_Icon.png" solution="AppModuleWebResources (2.5)" />
+        <Dependent type="80" schemaName="veh_CPSFDPAgentEvalAdminApp" displayName="CPS FDP Agent Eval Admin App" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="SettingDefinition" displayName="AppChannel" solution="msdyn_AppFrameworkInfraExtensions (1.0.0.14)" id.uniquename="AppChannel">
+          <package appName="PowerAppsAppFramework Package" version="1.0.0.19">PowerAppsAppFramework_Anchor (1.0.0.19)</package>
+        </Required>
+        <Dependent type="AppSetting" displayName="parentappmoduleid.uniquename=veh_CPSFDPAgentEvalAdminApp,settingdefinitionid.uniquename=AppChannel" id.parentappmoduleid.uniquename="veh_CPSFDPAgentEvalAdminApp" id.settingdefinitionid.uniquename="AppChannel" />
+      </MissingDependency>
+    </MissingDependencies>
+  </SolutionManifest>
+</ImportExportXml>
