@@ -61,3 +61,6 @@ For more information on these **risk** evaluators, note the following article:
 For more information on the Azure AI Foundry Continuous Evaluation service, note this blog: [Achieve End-to-End Observability in Azure AI Foundry | Azure AI Foundry Blog](https://devblogs.microsoft.com/foundry/achieve-end-to-end-observability-in-azure-ai-foundry/)
 
 And note this Microsoft Learn section: [Monitor your Generative AI Applications - Azure AI Foundry | Microsoft Learn](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/monitor-applications)
+
+### Next
+[Requirements for Installation](documentation/requirements-for-installation.md)
