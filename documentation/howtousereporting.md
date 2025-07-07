@@ -7,6 +7,8 @@
 - [FAQs](faq.md)
 <br><br>
 
+- [Color Coding](#colorcoding)
+- 
 ## How To Use The Solution
 The evaluation service provides analysis of conversations from an aggregate perspective down to the individual prompts and responses. 
 
@@ -41,3 +43,15 @@ Similar to the "Trends - Quality" page, the page "Trends - Safety and Risk" disp
 
 #### Safety and Risk Conversation Analysis
 The conversation analysis is similar to the quality trends conversation analysis except for safety and risk evaluators.
+
+### Color Coding
+AI Quality conditional coloring
+
+•	Green: 4.01 – 5.00
+•	Yellow: 2.00 – 4.00
+•	Red: 0.00 – 1.99
+
+Safety Risk conditional coloring
+•	Green: 0.00 – 1.99
+•	Yellow: 2.00 – 5.00
+•	Red: 6.01 – 7.00
