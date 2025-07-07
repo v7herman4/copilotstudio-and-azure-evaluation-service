@@ -255,3 +255,6 @@ Publish the Power BI report.
 Configure the Power BI data source refresh.
 
 Share the Power BI report with your target audience.
+
+### Next
+[Requirements for End Users](requirements-for-endusers.md)
