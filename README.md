@@ -54,7 +54,7 @@ Additionally, the service provides values and reasons for the following **risk**
 \-          Violence
 
 Here is an example of the dashboard for this solution with Evaluators:
-![Figure 0‑1](images/1-Report-Dashboard.png)
+![Figure 0‑1](documentation/images/1-Report-Dashboard.png)
 
 For detailed instructions on how to navigate the Power BI report see the section:
 [How to Use the Solution (Reporting) ](documentation/howtousereporting.md)
