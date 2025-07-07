@@ -52,6 +52,7 @@ Yellow: 2.00 – 4.00 <br>
 Red: 0.00 – 1.99 <br>
 
 Safety Risk conditional coloring
+
 Green: 0.00 – 1.99 <br>
 Yellow: 2.00 – 5.00 <br>
 Red: 6.01 – 7.00 <br>
