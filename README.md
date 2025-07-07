@@ -53,6 +53,12 @@ Additionally, the service provides values and reasons for the following **risk**
 
 \-          Violence
 
+Here is an example of the dashboard for this solution with Evaluators:
+![Figure 0‑1](images/1-Report-Dashboard.png)
+
+For detailed instructions on how to navigate the Power BI report see the section:
+[How to Use the Solution (Reporting) ](documentation/howtousereporting.md)
+
 For more information on these **risk** evaluators, note the following article:
 
 [Risk and safety evaluators for generative AI - Azure AI Foundry | Microsoft Learn](https://learn.microsoft.com/en-us/azure/ai-foundry/concepts/evaluation-evaluators/risk-safety-evaluators)
