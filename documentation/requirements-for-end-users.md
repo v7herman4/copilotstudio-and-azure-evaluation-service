@@ -22,6 +22,5 @@ For Environment where solution is installed
 
 \-          CPS Evaluation Security Role
 
-## Installation
-
-Installing the solution involves the steps below.
+### Next
+[Installation Guide](installation.md)
