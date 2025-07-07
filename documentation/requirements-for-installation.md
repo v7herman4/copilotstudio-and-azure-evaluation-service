@@ -1,7 +1,7 @@
 ## Table of Contents
 - [Overview](#overview)
 - [Requirements for Installation](requirements-for-installation.md)
-- [Requirements for End Users](requirements-for-endusers.md)
+- [Requirements for End Users](requirements-for-end-users.md)
 - [Installation Guide](installation.md)
 - [FAQs](faq.md)
 <br><br>
@@ -27,4 +27,4 @@ Note: a Copilot Studio User License is not required
 The latest Power BI desktop application is required to publish the Power BI report.
 
 ### Next
-[Requirements for End Users](requirements-for-endusers.md)
+[Requirements for End Users](requirements-for-end-users.md)
