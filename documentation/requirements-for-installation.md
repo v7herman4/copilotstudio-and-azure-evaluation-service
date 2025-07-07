@@ -25,3 +25,6 @@ Note: a Copilot Studio User License is not required
 ### Other
 
 The latest Power BI desktop application is required to publish the Power BI report.
+
+### Next
+[Requirements for End Users](requirements-for-endusers.md)
