@@ -11,6 +11,18 @@
 The evaluation service provides analysis of conversations from an aggregate perspective down to the individual prompts and responses. 
 
 ### View Evaluations in Aggregate
-The Page "Overview" shows all evaluators aggregated over a date range and for all agents.
+The page "Overview" shows all evaluators aggregated over a date range and for all agents.<br><br>
 
 ![Figure 0‑1](images/1-Report-Dashboard.png)
+
+## Quality Trends
+The page "Trends - Quality" displays the evaluators for AI quality over a date range and for all agents. Filter as needed or sort the table to view data by column.<br><br>
+
+![Figure 0‑2](images/2-Report-QualityEvals.png)
+
+
+### Quality Trends Conversation Analysis
+Select *one* conversation on the timeline or in the table to analyze the specific conversation.
+
+
+
