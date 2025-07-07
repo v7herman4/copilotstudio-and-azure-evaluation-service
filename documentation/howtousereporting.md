@@ -26,8 +26,10 @@ Select **one** conversation on the timeline or in the table to analyze the speci
 
 ![Figure 0‑3](images/3-Report-QualityEval-1.png)
 
-The Conversation Analysis visual shows the average of the evaluators for that entire conversation. The bottom sections shows the individual messages between a user and the agent. Each prompt/response is considered a run and gets its own evaluation. View the individual evaluations by clicking on the "AI Quality" or "Safety Harm" buttons. <br><br>
+The Conversation Analysis visual shows the average of the evaluators for that entire conversation. The bottom sections shows the individual messages between a user and the agent. Each prompt/response is considered a run and gets its own evaluation. The users's prompt is in green and the agent's prompt is in grey. The *Run Index* is for internal use only.<br><br>
 
 ![Figure 0‑4](images/4-Report-QualityEval-Analysis.png)
 
+You can view the individual evaluations for each specific run by clicking on the "AI Quality" or "Safety Harm" buttons for that run. Additionally, you can view the reason each evaluation was scored as shown by hovering over each evaluator. For example, below the mouse is hovering over the *Relevance* evaluator. <br><br>
 
+![Figure 0‑5](images/5-Report-QualityEval-Analysis-Reason.png)
