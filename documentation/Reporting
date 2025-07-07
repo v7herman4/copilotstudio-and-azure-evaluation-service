@@ -3,6 +3,7 @@
 - [Requirements for Installation](requirements-for-installation.md)
 - [Requirements for End Users](requirements-for-end-users.md)
 - [Installation Guide](installation.md)
+- [How to Use The Solution](howtousereporting.md)
 - [FAQs](faq.md)
 <br><br>
 
