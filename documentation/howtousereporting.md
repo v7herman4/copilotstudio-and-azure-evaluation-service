@@ -47,11 +47,11 @@ The conversation analysis is similar to the quality trends conversation analysis
 ## Color Coding
 AI Quality conditional coloring
 
-•	Green: 4.01 – 5.00
-•	Yellow: 2.00 – 4.00
-•	Red: 0.00 – 1.99
+Green: 4.01 – 5.00 <br>
+Yellow: 2.00 – 4.00 <br>
+Red: 0.00 – 1.99 <br>
 
 Safety Risk conditional coloring
-•	Green: 0.00 – 1.99
-•	Yellow: 2.00 – 5.00
-•	Red: 6.01 – 7.00
+Green: 0.00 – 1.99 <br>
+Yellow: 2.00 – 5.00 <br>
+Red: 6.01 – 7.00 <br>
