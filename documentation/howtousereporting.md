@@ -37,5 +37,7 @@ You can view the individual evaluations for each specific run by clicking on the
 ### Safety and Risk Trends
 Similar to the "Trends - Quality" page, the page "Trends - Safety and Risk" displays the evaluators for Safety and Risk over a date range and for all agents. Filter as needed or sort the table to view data by column.<br><br>
 
+![Figure 0‑6](images/6-Report-SafetyRiskEval-Analysis.png)
+
 #### Safety and Risk Conversation Analysis
 The conversation analysis is similar to the quality trends conversation analysis except for safety and risk evaluators.
