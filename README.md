@@ -5,6 +5,7 @@
 - [Requirements for Installation](documentation/requirements-for-installation.md)
 - [Requirements for End Users](documentation/requirements-for-endusers.md)
 - [Installation Guide](documentation/installation.md)
+- [How to Use The Solution](documentation/howtousereporting.md)
 - [FAQs](documentation/faq.md)
 
 ## Overview
