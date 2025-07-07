@@ -21,7 +21,7 @@ The page "Trends - Quality" displays the evaluators for AI quality over a date r
 ![Figure 0‑2](images/2-Report-QualityEvals.png)
 
 
-### Quality Trends Conversation Analysis
+#### Quality Trends Conversation Analysis
 Select **one** conversation on the timeline or in the table to analyze the specific conversation. Note the Conversation Analysis visual in the bottom right.<br><br>
 
 ![Figure 0‑3](images/3-Report-QualityEval-1.png)
@@ -33,3 +33,9 @@ The Conversation Analysis visual shows the average of the evaluators for that en
 You can view the individual evaluations for each specific run by clicking on the "AI Quality" or "Safety Harm" buttons for that run. Additionally, you can view the reason each evaluation was scored as shown by hovering over each evaluator. For example, below the mouse is hovering over the *Relevance* evaluator. <br><br>
 
 ![Figure 0‑5](images/5-Report-QualityEval-Analysis-Reason.png)
+
+### Safety and Risk Trends
+Similar to the "Trends - Quality" page, the page "Trends - Safety and Risk" displays the evaluators for Safety and Risk over a date range and for all agents. Filter as needed or sort the table to view data by column.<br><br>
+
+#### Safety and Risk Conversation Analysis
+The conversation analysis is similar to the quality trends conversation analysis except for safety and risk evaluators.
