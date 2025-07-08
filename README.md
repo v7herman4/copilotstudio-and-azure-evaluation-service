@@ -8,6 +8,8 @@
 - [How to Use The Solution](documentation/howtousereporting.md)
 - [FAQs](documentation/faq.md)
 
+Click [here](https://v7herman4.github.io/ai-agentic-insights/blog-Copilot-and-Evaluation-Service.html) to view the blog on this solution.
+
 ## Overview
 
 In order to trust that the Agent you built is performing as expected in “the wild”, you must evaluate its conversations consistently. With the Azure AI Foundry Evaluation Service (Evaluation Service) you can monitor your agent created with Copilot Studio.
