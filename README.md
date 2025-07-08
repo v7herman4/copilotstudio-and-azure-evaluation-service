@@ -71,3 +71,7 @@ And note this Microsoft Learn section: [Monitor your Generative AI Applications 
 
 ### Next
 [Requirements for Installation](documentation/requirements-for-installation.md)
+
+## Many people contributed to this solution! A big thanks to the team for their efforts.
+[![Contributors](https://img.shields.io/github/contributors/v7herman4/copilotstudio-and-azure-evaluation-service.svg)](https://github.com/v7herman4/copilotstudio-and-azure-evaluation-service/graphs/contributors)
+
