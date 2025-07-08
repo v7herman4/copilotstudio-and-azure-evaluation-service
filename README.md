@@ -2,11 +2,13 @@
 
 ## Table of Contents
 - [Overview](#overview)
+- [Contributors](#contributors)
 - [Requirements for Installation](documentation/requirements-for-installation.md)
 - [Requirements for End Users](documentation/requirements-for-endusers.md)
 - [Installation Guide](documentation/installation.md)
 - [How to Use The Solution](documentation/howtousereporting.md)
 - [FAQs](documentation/faq.md)
+- 
 
 ## Overview
 
@@ -72,6 +74,10 @@ And note this Microsoft Learn section: [Monitor your Generative AI Applications 
 ### Next
 [Requirements for Installation](documentation/requirements-for-installation.md)
 
-## Many people contributed to this solution! A big thanks to the team for their efforts.
-[![Contributors](https://img.shields.io/github/contributors/v7herman4/copilotstudio-and-azure-evaluation-service.svg)](https://github.com/v7herman4/copilotstudio-and-azure-evaluation-service/graphs/contributors)
-
+## Contributors
+Many people contributed to this solution! A big thanks to the team for their efforts.
+- [@v7herman4](https://github.com/v7herman4)
+- [@melilace](https://github.com/melilace)
+- [@stevenpon](https://github.com/stevepon)
+- [@thecsw](https://github.com/thecsw)
+- David Amble
