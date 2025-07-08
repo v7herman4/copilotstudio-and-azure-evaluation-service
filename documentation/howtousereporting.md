@@ -6,8 +6,6 @@
 - [How to Use The Solution](howtousereporting.md)
 - [FAQs](faq.md)
 <br><br>
-
- [Color Coding](#colorcoding)
   
 ## How To Use The Solution
 The evaluation service provides analysis of conversations from an aggregate perspective down to the individual prompts and responses. 
