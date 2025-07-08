@@ -7,7 +7,6 @@
 - [Installation Guide](documentation/installation.md)
 - [How to Use The Solution](documentation/howtousereporting.md)
 - [FAQs](documentation/faq.md)
-- 
 
 ## Overview
 
