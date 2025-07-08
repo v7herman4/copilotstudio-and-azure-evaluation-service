@@ -75,8 +75,8 @@ And note this Microsoft Learn section: [Monitor your Generative AI Applications 
 
 ## Contributors
 Many people contributed to this solution! A big thanks to the team for their efforts.
-- [@v7herman4](https://github.com/v7herman4)
 - [@melilace](https://github.com/melilace)
 - [@stevenpon](https://github.com/stevepon)
 - [@thecsw](https://github.com/thecsw)
 - David Amble
+- [@v7herman4](https://github.com/v7herman4)
